@@ -10,18 +10,27 @@ services:
     labels:
       - traefik.enable=true
 
-      # Router HTTPS (asrm.dev + www)
+      # Router HTTPS principal (asrm.dev y www.asrm.dev)
       - traefik.http.routers.asrm-https.rule=Host(`asrm.dev`) || Host(`www.asrm.dev`)
       - traefik.http.routers.asrm-https.entrypoints=websecure
       - traefik.http.routers.asrm-https.tls=true
       - traefik.http.routers.asrm-https.tls.certresolver=lets
       - traefik.http.services.asrm.loadbalancer.server.port=80
 
-      # Redirigir www → apex
+      # Forzar www -> apex (www.asrm.dev -> asrm.dev)
       - traefik.http.middlewares.asrm-www2apex.redirectregex.regex=^https?://www\.asrm\.dev/(.*)
       - traefik.http.middlewares.asrm-www2apex.redirectregex.replacement=https://asrm.dev/$$1
       - traefik.http.middlewares.asrm-www2apex.redirectregex.permanent=true
       - traefik.http.routers.asrm-https.middlewares=asrm-www2apex
+
+      # Cabeceras de seguridad básicas
+      - traefik.http.middlewares.asrm-sec.headers.stsSeconds=31536000
+      - traefik.http.middlewares.asrm-sec.headers.stsIncludeSubdomains=true
+      - traefik.http.middlewares.asrm-sec.headers.stsPreload=true
+      - traefik.http.middlewares.asrm-sec.headers.browserXssFilter=true
+      - traefik.http.middlewares.asrm-sec.headers.contentTypeNosniff=true
+      - traefik.http.middlewares.asrm-sec.headers.referrerPolicy=no-referrer-when-downgrade
+      - traefik.http.routers.asrm-https.middlewares=asrm-www2apex,asrm-sec
 
 networks:
   red-clinicamv:
