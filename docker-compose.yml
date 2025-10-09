@@ -8,20 +8,24 @@ services:
     labels:
       - traefik.enable=true
 
-      # Router principal: asrm.dev
-      - traefik.http.routers.asrm.rule=Host(`asrm.dev`) || Host(`www.asrm.dev`)
-      - traefik.http.routers.asrm.entrypoints=websecure
-      - traefik.http.routers.asrm.tls=true
-      - traefik.http.routers.asrm.tls.certresolver=letsencrypt
+      # Router HTTPS
+      - traefik.http.routers.asrm-https.rule=Host(`asrm.dev`) || Host(`www.asrm.dev`)
+      - traefik.http.routers.asrm-https.entrypoints=websecure
+      - traefik.http.routers.asrm-https.tls=true
+      - traefik.http.routers.asrm-https.tls.certresolver=letsencrypt
+      - traefik.http.services.asrm.loadbalancer.server.port=80
 
-      # (Opcional) Redirección www -> apex
-      - traefik.http.routers.asrm.middlewares=redirect-to-apex@docker
+      # Router HTTP que fuerza HTTPS, si NO usas redirección global en entrypoint
+      - traefik.http.routers.asrm-http.rule=Host(`asrm.dev`) || Host(`www.asrm.dev`)
+      - traefik.http.routers.asrm-http.entrypoints=web
+      - traefik.http.routers.asrm-http.middlewares=asrm-redirect-https
+      - traefik.http.middlewares.asrm-redirect-https.redirectscheme.scheme=https
+
+      # Redirección www -> apex en HTTPS
       - traefik.http.middlewares.redirect-to-apex.redirectregex.regex=^https?://www\.asrm\.dev/(.*)
       - traefik.http.middlewares.redirect-to-apex.redirectregex.replacement=https://asrm.dev/$$1
       - traefik.http.middlewares.redirect-to-apex.redirectregex.permanent=true
-
-      # Servicio interno
-      - traefik.http.services.asrm.loadbalancer.server.port=80
+      - traefik.http.routers.asrm-https.middlewares=redirect-to-apex
 
 networks:
   traefik_proxy:
