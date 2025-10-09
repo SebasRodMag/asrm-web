@@ -16,6 +16,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Prepare lowercase image name
+        id: vars
+        run: |
+          echo "OWNER_LC=${GITHUB_REPOSITORY_OWNER,,}" >> $GITHUB_OUTPUT
+          echo "REPO_LC=${GITHUB_REPOSITORY##*/}" >> $GITHUB_OUTPUT
+          echo "REPO_LC=${REPO_LC,,}" >> $GITHUB_OUTPUT
+          echo "IMAGE=ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/asrm-web" >> $GITHUB_OUTPUT
+
       - name: Log in to GHCR
         uses: docker/login-action@v3
         with:
