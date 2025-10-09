@@ -1,0 +1,108 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f6;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #007BFF;
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.encabezado {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.imagen-perfil img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 5px solid white;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+h2 {
+    color: #007BFF;
+    border-bottom: 2px solid #007BFF;
+    padding-bottom: 5px;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+main {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.contenedor {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.resumen {
+    text-align: justify;
+}
+
+.elem-experiencia, .elem-educacion {
+    margin-bottom: 25px;
+}
+
+.elem-experiencia h3, .elem-educacion h3 {
+    margin-bottom: 5px;
+}
+
+.periodo {
+    color: #666;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+.habilidades {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.habilidades span {
+    background-color: #e9e9e9;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    color: #555;
+    white-space: nowrap;
+}
+
+.info-contacto a {
+    color: #7ab9fc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.info-contacto a:hover {
+    color: #2685eb;
+    text-decoration: underline;
+}

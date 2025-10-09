@@ -1,0 +1,22 @@
+[
+    {
+        "id": "block-1",
+        "htmlFile": "contenido/001.html",
+        "imageFile": "contenido/001.png"
+    },
+    {
+        "id": "block-2",
+        "htmlFile": "contenido/002.html",
+        "imageFile": "contenido/002.png"
+    },
+    {
+        "id": "block-3",
+        "htmlFile": "contenido/003.html",
+        "imageFile": "contenido/003.png"
+    },
+    {
+        "id": "block-4",
+        "htmlFile": "contenido/004.html",
+        "imageFile": "contenido/004.png"
+    }
+]

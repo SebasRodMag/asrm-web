@@ -1,0 +1,283 @@
+/* Estilos generales y reseteo básico */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+/* Estilos para los bloques de pantalla completa */
+.full-screen-block {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 40px;
+    /* <--- Padding uniforme de 40px en todos los lados */
+    gap: 40px;
+    /* <--- NUEVO: Espacio entre los elementos flex (text-content e img) */
+    position: relative;
+    overflow: hidden;
+
+    transition: background-color 0.5s ease-in-out;
+}
+
+/* Colores de fondo para diferenciar los bloques (opcional) */
+#block-1 {
+    background-color: #0a2d31;
+}
+
+#block-2 {
+    background-color: #02462c;
+}
+
+#block-3 {
+    background-color: #0a2d31;
+}
+
+#block-4 {
+    background-color: #02462c;
+}
+
+/* Contenedor para el texto dentro de cada bloque */
+.full-screen-block .text-content {
+    width: calc(50% - 20px);
+    /* <--- AJUSTADO: 50% del padre menos la mitad del gap */
+    max-width: 600px;
+    /* Mantenemos el max-width para pantallas muy grandes */
+    padding: 20px;
+    box-sizing: border-box;
+    /* text-align se definirá por las reglas nth-child para pares/impares */
+}
+
+/* Estilos para las imágenes dentro de los bloques */
+.full-screen-block img {
+    width: calc(50% - 20px);
+    /* <--- AJUSTADO: 50% del padre menos la mitad del gap */
+    max-width: 600px;
+    /* Mantenemos el max-width */
+    max-height: 80vh;
+    height: auto;
+    object-fit: contain;
+    padding: 20px;
+    box-sizing: border-box;
+    display: block;
+
+    opacity: 0;
+    /* Las transformaciones iniciales (translateX) se aplican por las reglas nth-child de abajo. */
+}
+
+
+/* Bloques IMPARES (nth-child(odd)): Texto a la IZQUIERDA, Imagen a la DERECHA */
+.full-screen-block:nth-child(odd) {
+    flex-direction: row;
+}
+
+.full-screen-block:nth-child(odd) .text-content {
+    text-align: left;
+}
+
+.full-screen-block:nth-child(odd) img {
+    transform: translateX(100%);
+}
+
+
+/* Bloques PARES (nth-child(even)): Imagen a la IZQUIERDA, Texto a la DERECHA */
+.full-screen-block:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.full-screen-block:nth-child(even) .text-content {
+    text-align: right;
+}
+
+.full-screen-block:nth-child(even) img {
+    transform: translateX(-100%);
+}
+
+
+/* Mensaje de rotación del dispositivo (sin cambios significativos) */
+.rotate-device-message {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #222;
+    color: #fff;
+    font-size: 1.5em;
+    padding: 20px;
+    box-sizing: border-box;
+    z-index: 1000;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.rotate-device-message img {
+    margin-top: 30px;
+    width: 100px;
+    height: auto;
+    animation: pulse 1.5s infinite alternate;
+}
+
+@keyframes pulse {
+    from {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    to {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+}
+
+
+/* Media Queries */
+@media screen and (orientation: portrait) and (max-width: 900px) {
+    #main-presentation-content {
+        display: none !important;
+    }
+
+    .rotate-device-message {
+        display: flex;
+    }
+}
+
+@media (max-width: 768px) {
+    .full-screen-block {
+        flex-direction: column;
+        padding: 20px;
+        /* Reducimos padding en móviles */
+        gap: 20px;
+        /* Reducimos el gap en móviles */
+    }
+
+    .full-screen-block .text-content,
+    .full-screen-block img {
+        width: 100%;
+        /* Ocupa el 100% del ancho disponible en móviles */
+        max-width: 100%;
+        transform: translateX(0) !important;
+        opacity: 1 !important;
+    }
+
+    .full-screen-block .text-content {
+        text-align: center;
+    }
+}
+
+
+/* Estilos para los elementos de texto dentro de los bloques */
+.full-screen-block h1,
+.full-screen-block h2 {
+    font-size: 2.8em;
+    margin-bottom: 20px;
+    color: #cee2f5;
+}
+
+.full-screen-block p {
+    font-size: 1.15em;
+    max-width: 100%;
+    margin-bottom: 15px;
+    color: #cccaca;
+}
+
+.full-screen-block a {
+    color: #3498db;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.full-screen-block a:hover {
+    color: #2980b9;
+}
+
+.block-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* Centrado vertical */
+    justify-content: center;
+    /* Centrado horizontal del contenedor */
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 40px;
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+/* Reemplaza flex-direction en función del bloque (pares o impares) */
+.full-screen-block:nth-child(odd) .block-wrapper {
+    flex-direction: row;
+}
+
+.full-screen-block:nth-child(even) .block-wrapper {
+    flex-direction: row-reverse;
+}
+
+.text-content {
+    flex: 1;
+    max-width: 600px;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(20px);
+    /* Ajuste fino para compensar la imagen más pequeña */
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    max-height: 80vh;
+    object-fit: contain;
+}
+
+/* Responsivo en móviles */
+@media (max-width: 768px) {
+    .block-wrapper {
+        flex-direction: column !important;
+        gap: 10px;
+    }
+
+    .text-content,
+    .image-container {
+        max-width: 100%;
+        text-align: center !important;
+    }
+
+    .full-screen-block h1,
+    .full-screen-block h2 {
+        font-size: 1.2em;
+        /* Antes: 2.8em */
+    }
+
+    .full-screen-block p {
+        font-size: 0.75em;
+        /* Antes: 1.15em */
+    }
+
+    .text-content {
+        padding: 5px;
+    }
+
+    .image-container img {
+        max-height: 50vh;
+    }
+}
