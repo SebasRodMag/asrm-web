@@ -16,15 +16,14 @@
     <div class="wrap">
         <header class="topbar">
             <a href="../">Inicio</a>
-            <div style="flex:1"></div>
+            <div class="spacer"></div>
             <div class="lang-wrap">
                 <label class="visually-hidden" for="langSelect">Idioma</label>
-                <select id="langSelect" class="select-lang" aria-label="Idioma" >
+                <select id="langSelect" class="select-lang select-sm" aria-label="Idioma">
                     <option value="es">ES</option>
                     <option value="en">EN</option>
                 </select>
             </div>
-
             <button class="btn" id="themeToggle" type="button">Tema</button>
         </header>
 
@@ -111,6 +110,24 @@
                 const html = purify(parseMd(md));
                 container.innerHTML = html;
 
+                // --- Normaliza iframes para que sean responsive y perezosos ---
+                container.querySelectorAll('iframe').forEach((ifr) => {
+                    // lazy si el navegador lo soporta
+                    if (!ifr.hasAttribute('loading')) ifr.setAttribute('loading', 'lazy');
+                    // fullscreen si aplica
+                    if (!ifr.hasAttribute('allowfullscreen')) ifr.setAttribute('allowfullscreen', '');
+                    // envuelve en .embed si no lo está
+                    if (!ifr.parentElement.classList.contains('embed')) {
+                        const wrap = document.createElement('div');
+                        wrap.className = 'embed';
+                        ifr.replaceWith(wrap);
+                        wrap.appendChild(ifr);
+                    }
+                });
+
+                // --- Asegura lazy en imágenes (por si el MD no lo trae) ---
+                container.querySelectorAll('img:not([loading])')
+                    .forEach(img => img.setAttribute('loading', 'lazy'));
                 // Título/meta
                 const explicitTitle = qs.get('title');
                 const h1 = container.querySelector('h1');
@@ -166,6 +183,32 @@
                         });
                     }, { rootMargin: '-30% 0px -60% 0px', threshold: [0, 1] });
                     headings.forEach(h => io.observe(h));
+                }
+
+                // --- TOC plegable en móvil ---
+                const tocBox = document.querySelector('.toc');
+                if (tocBox) {
+                    // Si estamos en móvil, permite abrir/cerrar toc tocando el h3
+                    const mq = window.matchMedia('(max-width: 720px)');
+                    function syncTocBehavior() {
+                        if (mq.matches) {
+                            tocBox.classList.remove('open'); // cerrado por defecto
+                            tocBox.querySelector('h3')?.setAttribute('role', 'button');
+                            tocBox.querySelector('h3')?.setAttribute('aria-expanded', 'false');
+                        } else {
+                            tocBox.classList.add('open');    // siempre abierto en desktop/tablet
+                            tocBox.querySelector('h3')?.removeAttribute('role');
+                            tocBox.querySelector('h3')?.removeAttribute('aria-expanded');
+                        }
+                    }
+                    syncTocBehavior();
+                    mq.addEventListener?.('change', syncTocBehavior);
+
+                    tocBox.querySelector('h3')?.addEventListener('click', () => {
+                        if (!mq.matches) return;                 // solo actúa en móvil
+                        const isOpen = tocBox.classList.toggle('open');
+                        tocBox.querySelector('h3')?.setAttribute('aria-expanded', String(isOpen));
+                    });
                 }
 
                 // Botón “volver arriba” (opcional si existe en el DOM)

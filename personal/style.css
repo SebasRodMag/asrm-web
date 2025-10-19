@@ -410,6 +410,266 @@ article.card img {
     display: block
 }
 
+.topbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.topbar .spacer {
+    flex: 1;
+}
+
+/* En móviles, reduce márgenes y aprieta un poco el header */
+@media (max-width: 720px) {
+    .wrap {
+        padding: 18px;
+    }
+
+    .topbar {
+        gap: 8px;
+    }
+
+    .topbar a {
+        font-size: .95rem;
+    }
+}
+
+/* ===== Detalle: mejorar legibilidad de artículo ===== */
+article.card h1,
+article.card h2,
+article.card h3 {
+    scroll-margin-top: 84px;
+    /* para que al saltar a ancla no quede pegado al borde */
+}
+
+article.card pre,
+article.card code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+article.card pre {
+    background: color-mix(in srgb, var(--card) 85%, black);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px;
+    overflow-x: auto;
+}
+
+/* Tablas anchas: scroll horizontal solo en móvil */
+@media (max-width: 720px) {
+    article.card table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        border-collapse: collapse;
+    }
+}
+
+/* Imágenes formateadas */
+article.card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+}
+
+/* ===== Detalle: TOC plegable en móvil ===== */
+@media (max-width: 980px) {
+    aside {
+        position: static;
+        top: auto;
+    }
+
+    /* quitar sticky en 1 columna */
+}
+
+@media (max-width: 720px) {
+
+    /* Simil “details” visual para el toc */
+    .toc {
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .toc h3 {
+        margin: 0;
+        padding: 12px;
+        cursor: pointer;
+        user-select: none;
+        border-bottom: 1px solid var(--line);
+    }
+
+    .toc nav {
+        padding: 10px 12px;
+        display: none;
+        /* cerrado por defecto en móvil */
+    }
+
+    .toc.open nav {
+        display: block;
+        /* abierto cuando añadimos .open vía JS */
+    }
+}
+
+/* Enlaces del TOC más apretados en móvil */
+@media (max-width: 720px) {
+    .toc a {
+        margin: .2rem 0;
+    }
+
+    article.card h1 {
+        font-size: 1.45rem;
+    }
+
+    article.card h2 {
+        font-size: 1.2rem;
+    }
+
+    article.card h3 {
+        font-size: 1.05rem;
+    }
+}
+
+/* Botón “volver arriba” respetando safe-area */
+.back-top {
+    bottom: calc(16px + env(safe-area-inset-bottom));
+}
+
+/* ===== Contenido responsive dentro de article.card ===== */
+article.card {
+    --measure: 68ch;
+    /* ancho de línea ideal en desktop */
+    font-size: clamp(.95rem, .9rem + .3vw, 1.05rem);
+    line-height: 1.6;
+}
+
+/* Mantén el texto legible sin ocupar todo el ancho enorme en desktop */
+article.card>p,
+article.card>ul,
+article.card>ol,
+article.card>blockquote,
+article.card>pre,
+article.card>table,
+article.card>figure {
+    max-inline-size: var(--measure);
+}
+
+/* En móvil, usa todo el ancho disponible */
+@media (max-width: 720px) {
+    article.card>* {
+        max-inline-size: 100%;
+    }
+}
+
+/* Párrafos y listados: buenos cortes de línea */
+article.card p,
+article.card li {
+    overflow-wrap: anywhere;
+    hyphens: auto;
+}
+
+/* Imágenes y figuras fluidas */
+article.card img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+}
+
+article.card figure {
+    margin: 1rem 0;
+}
+
+article.card figure>figcaption {
+    color: var(--muted);
+    font-size: .9em;
+    margin-top: .35rem;
+}
+
+/* Código legible y scrolleable */
+article.card pre {
+    background: color-mix(in srgb, var(--card) 85%, black);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px;
+    overflow-x: auto;
+}
+
+article.card code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: .95em;
+}
+
+/* Tablas: scroll horizontal en pantallas estrechas */
+article.card table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+article.card th,
+article.card td {
+    border: 1px solid var(--line);
+    padding: .5rem .6rem;
+    text-align: left;
+}
+
+@media (max-width: 720px) {
+    article.card table {
+        display: block;
+        overflow-x: auto;
+    }
+}
+
+/* Iframes (videos, demos) responsive vía aspect-ratio */
+.embed {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    /* ajusta si usas 4:3 u otro */
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    overflow: hidden;
+    background: #0003;
+}
+
+.embed>iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* Titulares con espacio al hacer anchor jump (ya tienes scroll-margin, lo mantengo) */
+article.card h1,
+article.card h2,
+article.card h3 {
+    scroll-margin-top: 84px;
+}
+
+/* Un poco de ritmo vertical en móvil */
+@media (max-width: 720px) {
+    article.card h1 {
+        font-size: 1.45rem;
+    }
+
+    article.card h2 {
+        font-size: 1.2rem;
+    }
+
+    article.card h3 {
+        font-size: 1.05rem;
+    }
+
+    article.card p,
+    article.card ul,
+    article.card ol {
+        margin: .8rem 0;
+    }
+}
+
 /* -------- Timeline centrado -------- */
 .center {
     text-align: center
@@ -755,19 +1015,24 @@ article.card img {
     header .mnav {
         display: block;
     }
-    .spacer{
+
+    .spacer {
         flex: 1;
     }
 
     #bgToggle {
         display: none;
     }
-    #themeToggle{
+
+    #themeToggle {
         display: none;
     }
 
     .mnav .menu .bg-toggle-item {
         display: flex;
     }
-    .spacer{ flex:1; }
+
+    .spacer {
+        flex: 1;
+    }
 }
