@@ -1,10 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
     // ===== Idioma actual =====
     const DEFAULT_LANG = 'es';
-    const langSelect = document.getElementById('langSelect');
+    const langSelects = document.querySelectorAll('#langSelect, #langSelectMobile');
     const savedLang = localStorage.getItem('lang');
     let currentLang = savedLang || ((navigator.language || 'es').toLowerCase().startsWith('es') ? 'es' : 'en');
-    if (langSelect) langSelect.value = currentLang;
+
+    // Inicializa ambos selects
+    langSelects.forEach(s => { if (s) s.value = currentLang; });
     document.documentElement.lang = currentLang;
 
     const I18N = {
@@ -27,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'modal.quick.cm': 'Centro Médico',
             'actions.bg.on': 'Fondo: ON',
             'actions.bg.off': 'Fondo: OFF',
+            'actions.menu': 'Menú',
 
 
             // Cards (descripciones breves)
@@ -72,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'modal.quick.cm': 'Medical Center',
             'actions.bg.on': 'Background: ON',
             'actions.bg.off': 'Background: OFF',
+            'actions.menu': 'Menu',
 
             // Cards
             'card.mv.title': 'MV Clinic Management',
@@ -110,33 +114,36 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
             const txt = I18N[lang]?.[key] ?? I18N[DEFAULT_LANG]?.[key];
-            if (!txt) return;
-            // Para botones/enlaces usamos textContent (evita sobrescribir HTML interno)
-            el.textContent = txt;
+            if (txt) el.textContent = txt;
         });
         document.documentElement.lang = lang;
     }
+
+    function setLang(lang) {
+        currentLang = lang;
+        localStorage.setItem('lang', lang);
+        langSelects.forEach(s => { if (s) s.value = lang; });
+        applyI18n(lang);
+        syncBgButtonLabel(); // por si el botón “Fondo” cambia ES/EN
+    }
+
     applyI18n(currentLang);
 
+    // escucha cambios en cualquiera de los dos selects
+    langSelects.forEach(s => s?.addEventListener('change', (e) => setLang(e.target.value)));
 
-    // Cambios de idioma (persisten y actualizan UI)
-    langSelect?.addEventListener('change', () => {
-        currentLang = langSelect.value;
-        localStorage.setItem('lang', currentLang);
-        applyI18n(currentLang);
-    });
     // ========== Tema persistente ==========
     const root = document.documentElement;
-    const btnTheme = document.getElementById('themeToggle');
-    const saved = localStorage.getItem('theme');
-    if (saved) root.setAttribute('data-theme', saved);
-    if (btnTheme) {
-        btnTheme.addEventListener('click', () => {
-            const now = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-            root.setAttribute('data-theme', now);
-            localStorage.setItem('theme', now);
-        });
+    const themeButtons = document.querySelectorAll('#themeToggle, #themeToggle1'); // <-- ambos
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) root.setAttribute('data-theme', savedTheme);
+
+    function toggleTheme() {
+        const now = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        root.setAttribute('data-theme', now);
+        localStorage.setItem('theme', now);
     }
+    themeButtons.forEach(btn => btn?.addEventListener('click', toggleTheme));
 
     // Copiar email (no fallar si no existe)
     const btnCopy = document.getElementById('copyEmail');
@@ -225,6 +232,10 @@ document.addEventListener('DOMContentLoaded', () => {
         content.innerHTML = '';
         lastFocus?.focus();
     }
+
+    document.getElementById('mnav')?.addEventListener('click', (e) => {
+        if (e.target.closest('.menu a')) e.currentTarget.open = false;
+    });
 
     // Delegación: abrir por data-modal-md
     document.addEventListener('click', (e) => {
@@ -321,43 +332,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Estado inicial del efecto de fondo
     const BG_KEY = 'bgghost';
-    const savedBgGhost = localStorage.getItem(BG_KEY); // 'on' | 'off' | null
-    // Por defecto: ON
-    document.documentElement.setAttribute('data-bgghost', savedBgGhost === 'off' ? 'off' : 'on');
+    const bgButtons = document.querySelectorAll('#bgToggle, #bgToggle1'); // <-- ambos
+    const savedBg = localStorage.getItem(BG_KEY); // 'on' | 'off' | null
+    document.documentElement.setAttribute('data-bgghost', savedBg === 'off' ? 'off' : 'on');
 
     function syncBgButtonLabel() {
-        const btn = document.getElementById('bgToggle');
-        if (!btn) return;
-        const on = document.documentElement.getAttribute('data-bgghost') !== 'off';
-        btn.setAttribute('aria-pressed', String(on));
-        // Actualiza el texto según idioma
-        const key = on ? 'actions.bg.on' : 'actions.bg.off';
-        const label = (I18N[currentLang]?.[key]) || (I18N[DEFAULT_LANG]?.[key]) || (on ? 'Fondo: ON' : 'Fondo: OFF');
-        // Si pusiste <span data-i18n> dentro, actualiza su textContent:
-        const span = btn.querySelector('[data-i18n]');
-        if (span) { span.textContent = label; span.setAttribute('data-i18n', key); }
-        else { btn.textContent = label; } // fallback si quitaste el span
-    }
-
-    applyI18n(currentLang);
-    syncBgButtonLabel();
-
-    langSelect?.addEventListener('change', () => {
-        currentLang = langSelect.value;
-        localStorage.setItem('lang', currentLang);
-        applyI18n(currentLang);
-        syncBgButtonLabel(); // <—
-    });
-
-    const bgToggle = document.getElementById('bgToggle');
-    if (bgToggle) {
-        bgToggle.addEventListener('click', () => {
-            const isOn = document.documentElement.getAttribute('data-bgghost') !== 'off';
-            const next = isOn ? 'off' : 'on';
-            document.documentElement.setAttribute('data-bgghost', next);
-            localStorage.setItem(BG_KEY, next);
-            syncBgButtonLabel();
+        const isOn = document.documentElement.getAttribute('data-bgghost') !== 'off';
+        bgButtons.forEach(btn => {
+            if (!btn) return;
+            btn.setAttribute('aria-pressed', String(isOn));
+            const span = btn.querySelector('[data-i18n]');
+            if (span) {
+                const key = isOn ? 'actions.bg.on' : 'actions.bg.off';
+                span.setAttribute('data-i18n', key);
+                // actualiza texto según idioma actual
+                span.textContent = I18N[currentLang]?.[key] ?? (isOn ? 'Fondo: ON' : 'Fondo: OFF');
+            } else {
+                btn.textContent = isOn ? 'Fondo: ON' : 'Fondo: OFF';
+            }
         });
     }
-    
+
+    function toggleBg() {
+        const isOn = document.documentElement.getAttribute('data-bgghost') !== 'off';
+        const next = isOn ? 'off' : 'on';
+        document.documentElement.setAttribute('data-bgghost', next);
+        localStorage.setItem(BG_KEY, next);
+        syncBgButtonLabel();
+    }
+
+    bgButtons.forEach(btn => btn?.addEventListener('click', toggleBg));
+    syncBgButtonLabel();
+
+
+    // ===== Cerrar el menú al hacer click en un enlace (UX) =====
+    document.getElementById('mnav')?.addEventListener('click', (e) => {
+        if (e.target.closest('.menu a')) e.currentTarget.open = false;
+    });
+    const mnav = document.getElementById('mnav');
+    function closeMenuIfInside(target) {
+        if (!mnav?.open) return;
+        if (target.closest('#mnav .menu')) mnav.open = false;
+    }
+    themeButtons.forEach(b => b?.addEventListener('click', e => closeMenuIfInside(e.target)));
+    bgButtons.forEach(b => b?.addEventListener('click', e => closeMenuIfInside(e.target)));
+    langSelects.forEach(s => s?.addEventListener('change', e => closeMenuIfInside(e.target)));
+
 });

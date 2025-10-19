@@ -499,8 +499,11 @@ article.card img {
 }
 
 @media (max-width:720px) {
+
     /*Quito el "Disponible" para dejar espacio*/
-    header .muted{ display: none; }
+    header .muted {
+        display: none;
+    }
 
     .timeline::before {
         left: 22px;
@@ -633,4 +636,138 @@ article.card img {
     .toggle-btn {
         min-inline-size: 9.5rem;
     }
+}
+
+/* Menú visible solo en la vista móvil*/
+/* Menú móvil: por defecto oculto en desktop */
+.mnav {
+    display: none;
+    position: relative;
+}
+
+.header-conf {
+    display: flex;
+    flex-direction: column !important;
+}
+
+/* Botón icono */
+.icon-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    border: 1px solid var(--line);
+    color: var(--fg);
+    background: var(--card);
+    padding: .45rem .7rem;
+    border-radius: .7rem;
+    cursor: pointer;
+}
+
+/* Hamburguesa */
+.hamburger {
+    width: 18px;
+    height: 12px;
+    position: relative;
+    display: inline-block;
+}
+
+.hamburger,
+.hamburger::before,
+.hamburger::after {
+    background: currentColor;
+    border-radius: 2px;
+}
+
+.hamburger::before,
+.hamburger::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+}
+
+.hamburger {
+    height: 2px;
+}
+
+.hamburger::before {
+    top: -5px;
+}
+
+.hamburger::after {
+    top: 5px;
+}
+
+/* Panel del menú */
+.mnav {
+    position: relative;
+}
+
+.mnav .menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    inset-inline-start: 0;
+    /* == left:0 en LTR */
+    inset-inline-end: auto;
+    /* quita el right anterior */
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: .6rem .8rem;
+    /* límites para pantallas estrechas */
+    max-inline-size: min(280px, calc(100vw - 16px));
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+    z-index: 1000;
+}
+
+/* Quitar marcador por defecto del summary */
+.mnav>summary {
+    list-style: none;
+}
+
+.mnav>summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Animar icono a “X” cuando está abierto (opcional) */
+.mnav[open] .hamburger {
+    background: transparent;
+}
+
+.mnav[open] .hamburger::before {
+    transform: translateY(5px) rotate(45deg);
+}
+
+.mnav[open] .hamburger::after {
+    transform: translateY(-5px) rotate(-45deg);
+}
+
+/* En móvil ocultamos el nav normal y mostramos el menú */
+@media (max-width:720px) {
+    header nav[aria-label="principal"] {
+        display: none;
+    }
+
+    header .mnav {
+        display: block;
+    }
+    .spacer{
+        flex: 1;
+    }
+
+    #bgToggle {
+        display: none;
+    }
+    #themeToggle{
+        display: none;
+    }
+
+    .mnav .menu .bg-toggle-item {
+        display: flex;
+    }
+    .spacer{ flex:1; }
 }

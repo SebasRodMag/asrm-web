@@ -19,14 +19,40 @@
     <div id="bg-ghost" aria-hidden="true"></div>
     <div class="wrap">
         <!-- Header -->
-        <header>
+        <header class="site-header">
             <div class="muted"><span class="badge" data-i18n="badge.available">Disponible</span></div>
             <nav aria-label="principal">
                 <a href="#proyectos" data-i18n="nav.experience">Experiencia</a>
                 <a href="#contacto" data-i18n="nav.contact">Contacto</a>
                 <a href="#proyectos" data-i18n="nav.view">Proyectos</a>
             </nav>
-            <div style="display:flex; gap:8px">
+
+            <!-- menú vista móvil -->
+            <details id="mnav" class="mnav">
+                <summary class="btn icon-btn" aria-label="Abrir menú">
+                    <span class="hamburger" aria-hidden="true"></span>
+                    <span class="label" data-i18n="actions.menu">Menú</span>
+                </summary>
+                <nav id="primaryNav" aria-label="principal" class="menu">
+                    <a href="#proyectos" data-i18n="nav.experience">Experiencia</a>
+                    <a href="#contacto" data-i18n="nav.contact">Contacto</a>
+                    <a href="#proyectos" data-i18n="nav.view">Proyectos</a>
+                    <select id="langSelectMobile" class="select-lang" aria-label="Idioma">
+                        <option value="es">ES</option>
+                        <option value="en">EN</option>
+                    </select>
+                    <button class="btn" id="themeToggle1" aria-label="Cambiar tema"
+                        data-i18n="actions.theme">Tema</button>
+                    <button class="btn" id="bgToggle1" type="button" aria-pressed="true">
+                        <span data-i18n="actions.bg.on">Fondo: ON</span>
+                    </button>
+                </nav>
+            </details>
+
+            <!-- Espaciador flexible -->
+            <div class="spacer"></div>
+
+            <div id="header-conf" style="display:flex; gap:8px">
                 <div class="lang-wrap">
                     <label class="visually-hidden" for="langSelect">Idioma</label>
                     <select id="langSelect" class="select-lang" aria-label="Idioma">
@@ -40,6 +66,8 @@
                     </button>
                 </div>
             </div>
+
+
 
 
         </header>
