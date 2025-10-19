@@ -1,112 +1,252 @@
-<!DOCTYPE html>
-<html lang="es">
+<!doctype html>
+<html lang="es" data-theme="dark">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sebastián Rodríguez - Portafolio</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sebastián Rodríguez — Desarrollador Full-Stack</title>
+    <meta name="description"
+        content="Portfolio de Sebastián Rodríguez: proyectos en Laravel, Angular y Docker con foco en calidad y usabilidad." />
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Librerías para Markdown -->
+    <script defer src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
+    <script defer src="js/main.js"></script>
 </head>
+
 <body>
-    <header>
-        <div class="encabezado">
-            <div class="imagen-perfil">
-                <img src="foto.png" alt="Foto de Sebastián Rodríguez">
+    <div id="bg-ghost" aria-hidden="true"></div>
+    <div class="wrap">
+        <!-- Header -->
+        <header>
+            <div class="muted"><span class="badge" data-i18n="badge.available">Disponible</span></div>
+            <nav aria-label="principal">
+                <a href="#proyectos" data-i18n="nav.experience">Experiencia</a>
+                <a href="#contacto" data-i18n="nav.contact">Contacto</a>
+                <a href="#proyectos" data-i18n="nav.view">Proyectos</a>
+            </nav>
+            <div style="display:flex; gap:8px">
+                <div class="lang-wrap">
+                    <label class="visually-hidden" for="langSelect">Idioma</label>
+                    <select id="langSelect" class="select-lang" aria-label="Idioma">
+                        <option value="es">ES</option>
+                        <option value="en">EN</option>
+                    </select>
+                    <button class="btn" id="themeToggle" aria-label="Cambiar tema"
+                        data-i18n="actions.theme">Tema</button>
+                    <button class="btn toggle-btn" id="bgToggle" type="button" aria-pressed="true">
+                        <span data-i18n="actions.bg.on">Fondo: ON</span>
+                    </button>
+                </div>
             </div>
-            <h1>Sebastián Rodríguez</h1>
-            <p>Desarrollador Web</p>
-        </div>
-    </header>
 
-    <main>
-        <section class="contenedor">
-            <h2>Resumen Profesional</h2>
-            <p class="resumen">
-                He liderado equipos de trabajo, donde la cualidad principal era la adaptabilidad y la capacidad para resolver problemas. Ahora me enfrento a un nuevo reto, dar el salto al desarrollo de aplicaciones, un mundo de posibilidades, tecnologías y retos que estoy deseando ver hasta dónde me puede llevar. Trabajar con nuevas tecnologías es algo que siempre me ha llamado la atención, pero, contribuir a desarrollar soluciones me ha apasionado desde que descubrí la automatización de procesos y lo importante que es la originalidad, la simplicidad y la innovación.
+
+        </header>
+
+        <!-- Hero centrado -->
+        <section class="hero" aria-labelledby="h1">
+            <h1 id="h1" data-anim="fade">Sebastián Rodríguez</h1>
+            <p class="sub muted" data-anim="fade" data-i18n="hero.cta.developer">Desarrollador Full-Stack · Laravel ·
+                Angular · Docker</p>
+            <div class="filterbar" data-anim="fade">
+                <span class="chip">Laravel</span><span class="chip">Angular</span><span class="chip">Docker</span>
+                <span class="chip">MySQL</span><span class="chip">GSAP</span>
+            </div>
+
+        </section>
+        <!--
+        Espacio: %20
+        á: %C3%A1
+        é: %C3%A9
+        í: %C3%AD
+        ó: %C3%B3
+        ú: %C3%BA
+        -->
+
+        <!-- Proyectos -->
+        <section id="proyectos" aria-labelledby="h2-proy" class="hero">
+            <h2 id="h2-proy" data-anim="fade" data-i18n="section.projects">Proyectos</h2>
+            <p class="lead muted" data-anim="fade" data-i18n="section.projects.lead">
+                Selección de trabajos recientes. Filtra por tecnología para ver lo más relevante.
             </p>
-        </section>
+            <div class="filterbar" data-anim="fade">
+                <button class="btn active chip" data-filter="all" data-i18n="filter.all" type="button">Todos</button>
+                <button class="btn chip" data-filter="laravel" data-i18n="filter.laravel" type="button">Laravel</button>
+                <button class="btn chip" data-filter="angular" data-i18n="filter.angular" type="button">Angular</button>
+                <button class="btn chip" data-filter="docker" data-i18n="filter.docker" type="button">Docker</button>
+            </div><br>
 
-        <section class="contenedor">
-            <h2>Experiencia Laboral</h2>
-            <div class="elem-experiencia">
-                <h3>Desarrollador Web | Seyte</h3>
-                <p class="periodo">marzo 2025 - junio 2025</p>
-                <p>Se me encomendó el desarrollo integral de un servicio de gestión de citas médicas, donde apliqué habilidades Full-stack para abarcar desde la interpretación de los requisitos, hasta el despliegue final.</p>
-                <ul>
-                    <li>Desarrollo de una API Rest utilizando Laravel.</li>
-                    <li>Construcción de una SPA con Angular.</li>
-                    <li>Gestión de la base de datos mediante SQLite.</li>
-                    <li>Despliegue de la aplicación a través de contenedores Docker.</li>
-                </ul>
-            </div>
-            <div class="elem-experiencia">
-                <h3>Jefe de equipo, Mantenimiento Industrial | Ferrovial Servicios</h3>
-                <p class="periodo">abril 2021 - noviembre 2022</p>
-                <ul>
-                    <li>Organizar tareas, Asignar labores a los miembros del equipo atendiendo a sus capacidades y aptitudes.</li>
-                    <li>Desarrollar el equipo por medio de la gestión del talento personal.</li>
-                </ul>
-            </div>
-            <div class="elem-experiencia">
-                <h3>Coordinador, Mantenimiento Industrial | Ferrovial Servicios</h3>
-                <p class="periodo">enero 2018 - enero 2021</p>
-                <ul>
-                    <li>Mantenimiento preventivo y correctivo.</li>
-                    <li>Coordinación de grupos de trabajo.</li>
-                    <li>Gestión Lean de entorno de trabajo.</li>
-                    <li>Gestión de almacén y Gestión de procesos y rutinas de mantenimientos mediante SAP.</li>
-                </ul>
-            </div>
-        </section>
+            <div class="grid">
+                <article class="card project-card" data-tags="laravel,docker" data-anim="fade" aria-labelledby="p1">
+                    <h3 id="modalTitle" style="margin-top:0" class="muted" data-i18n="modal.quick.gc">Gestión Clinica MV
+                    </h3>
+                    <p data-i18n="card.text.gc">Plataforma para la gestión de citas clínicas, optimizando la atención y
+                        el seguimiento entre
+                        especialistas y pacientes. La solución combina una API REST (Laravel) con una SPA (Angular)
+                        integrando Jitsi Meet para la realización de conferencias.</p>
+                    <a href="proyectos/detalle.html?src=content/proyectos/clinica-mv&title=Gesti%C3%B3n%20Clinica%20MV"
+                        data-i18n="actions.detail" aria-label="Ver proyecto Gestión Clinica MV">Ver</a>
+                </article>
 
-        <section class="contenedor">
-            <h2>Competencias</h2>
-            <div class="habilidades">
-                <span>HTML</span>
-                <span>CSS</span>
-                <span>JavaScript</span>
-                <span>TypeScript</span>
-                <span>Java</span>
-                <span>PHP</span>
-                <span>Python</span>
-                <span>Control de versiones - Git</span>
-                <span>Responsive Design</span>
-                <span>MySQL</span>
-                <span>MongoDB</span>
-                <span>Laravel</span>
-                <span>Angular</span>
-                <span>NodeJs</span>
+                <article>
+                    <div class="card project-card" data-tags="laravel,docker,angular" data-anim="fade"
+                        aria-labelledby="p1">
+                        <h3 id="modalTitle" style="margin-top:0" class="muted" data-i18n="modal.quick.cm">Centro Médico
+                        </h3>
+                        <p data-i18n="card.text.cm">Es una aplicación web, que consta de un backend (API Rest) em
+                            Laravel y el front (SPA) en
+                            Angular gestionado desde contenedores Docker con base de datos en MySQL</p>
+                        <p>La aplicación consiste en un sistema de gestión de citas médicas para un centro que realiza
+                            reconocimientos médicos para empresas.</p>
+                        <a href="proyectos/detalle.html?src=content/proyectos/centro-medico&title=Centro%20M%C3%A9dico"
+                            data-i18n="actions.detail" aria-label="Ver proyecto Centro Médico">Ver</a>
+                    </div>
+                </article>
             </div>
         </section>
 
-        <section class="contenedor">
-            <h2>Formación</h2>
-            <div class="elem-educacion">
-                <h3>Grado Superior DAW - IES Aguadulce</h3>
-                <p>Roquetas de Mar | junio 2025</p>
-            </div>
-            <div class="elem-educacion">
-                <h3>Certificaciones y Cursos</h3>
-                <ul>
-                    <li>Python Essentials 1 (CISCO)</li>
-                    <li>Fundamentos JavaScript (OpenWebinars)</li>
-                    <li>Fundamentos Angular (OpenWebinars)</li>
-                    <li>Desarrollo de aplicaciones web con NodeJs y Express</li>
-                </ul>
-            </div>
+        <!-- EXPERIENCIA -->
+        <section id="experiencia" aria-labelledby="exp-title">
+            <h2 id="exp-title" class="center" data-i18n="section.experience">Experiencia</h2>
+            <p class="lead center" data-i18n="section.experience.lead">Un resumen de roles y responsabilidades
+                destacadas.</p>
+
+            <ol class="timeline" aria-label="Cronología">
+                <li class="tl-item">
+                    <div class="tl-dot" aria-hidden="true"></div>
+                    <article class="tl-card">
+                        <h3 data-i18n="card.mv.title">Gestión Clinica MV</h3>
+                        <p class="muted">Laravel · Angular · Docker</p>
+                        <ul>
+                            <li data-i18n="card.item.gc.1">API REST con autenticación y roles.</li>
+                            <li data-i18n="card.item.gc.2">Calendario y modales accesibles.</li>
+                            <li data-i18n="card.item.gc.3">Despliegue Docker y proxy inverso.</li>
+                        </ul>
+                        <div class="actions" style="display: flex; justify-content: space-around;">
+                            <a href="#" data-modal-md="content/proyectos/clinica-mv.quick"
+                                data-i18n="actions.quick">Vista rápida</a>
+                            <a href="proyectos/detalle.html?src=content/proyectos/clinica-mv&title=Cl%C3%ADnica%20Diet%C3%A9tica%20MV"
+                                data-i18n="actions.detail">Ver detalle</a>
+                        </div>
+                    </article>
+                </li>
+
+                <li class="tl-item">
+                    <div class="tl-dot" aria-hidden="true"></div>
+                    <article class="tl-card">
+                        <h3 data-i18n="card.cm.title">Centro Médico</h3>
+                        <p class="muted">Laravel · Angular · Docker</p>
+                        <ul>
+                            <li data-i18n="card.item.cm.1">API REST con autenticación y roles.</li>
+                            <li data-i18n="card.item.cm.2">SPA Angular con gestión de citas.</li>
+                            <li data-i18n="card.item.cm.3">Gestión de roles por Spatie y Autentificación por token
+                                mediante Laravel Sanctum</li>
+                            <li data-i18n="card.item.cm.4">Despliegue Docker.</li>
+                        </ul>
+                        <div class="actions">
+                            <a href="#" data-modal-md="content/proyectos/stack-traefik.quick"
+                                data-i18n="actions.quick">Vista rápida</a>
+                            <a href="proyectos/detalle.html?src=content/proyectos/stack-traefik&title=Stack%20Traefik"
+                                data-i18n="actions.detail">Ver detalle</a>
+                        </div>
+                    </article>
+                </li>
+
+                <li class="tl-item">
+                    <div class="tl-dot" aria-hidden="true"></div>
+                    <article class="tl-card">
+                        <h3 data-i18n="card.tr.title">Stack Traefik</h3>
+                        <p class="muted">CI/CD · Contenedores</p>
+                        <ul>
+                            <li data-i18n="card.item.tr.1">TLS automático, routing por host/path.</li>
+                            <li data-i18n="card.item.tr.2">Build/push de imágenes en GitHub.</li>
+                        </ul>
+                        <div class="actions">
+                            <a href="#" data-modal-md="content/proyectos/stack-traefik.quick"
+                                data-i18n="actions.quick">Vista rápida</a>
+                            <a href="proyectos/detalle.html?src=content/proyectos/stack-traefik&title=Stack%20Traefik"
+                                data-i18n="actions.detail">Ver detalle</a>
+                        </div>
+                    </article>
+                </li>
+
+                <li class="tl-item">
+                    <div class="tl-dot" aria-hidden="true"></div>
+                    <article class="tl-card">
+                        <h3 data-i18n="card.cal.title">Calendario Interactivo</h3>
+                        <p class="muted">FullCalendar · Angular</p>
+                        <ul>
+                            <li data-i18n="card.item.ci.1">Filtros por estado y acciones rápidas.</li>
+                            <li data-i18n="card.item.ci.2">Focus trap y accesibilidad real.</li>
+                        </ul>
+                        <div class="actions">
+                            <a href="#" data-modal-md="content/proyectos/calendario-interactivo.quick"
+                                data-i18n="actions.quick">Vista rápida</a>
+                            <a href="proyectos/detalle.html?src=content/proyectos/calendario-interactivo&title=Calendario%20Interactivo"
+                                data-i18n="actions.detail">Ver detalle</a>
+                        </div>
+                    </article>
+                </li>
+
+                <li class="tl-item">
+                    <div class="tl-dot" aria-hidden="true"></div>
+                    <article class="tl-card">
+                        <h3>Videollamadas con Jitsi</h3>
+                        <p class="muted">Integración embebida</p>
+                        <ul>
+                            <li data-i18n="card.item.vj.1">Salas seguras con token.</li>
+                            <li data-i18n="card.item.vj.1">Join en un clic desde la cita.</li>
+                        </ul>
+                        <div class="actions">
+                            <a href="#" data-modal-md="content/proyectos/clinica-mv.quick"
+                                data-i18n="actions.quick">Vista rápida</a>
+                            <a href="proyectos/detalle.html?src=content/proyectos/clinica-mv&title=Cl%C3%ADnica%20Diet%C3%A9tica%20MV"
+                                data-i18n="actions.detail">Ver detalle</a>
+                        </div>
+                    </article>
+                </li>
+            </ol>
         </section>
 
-        <section class="contacto contenedor">
-            <h2>Contacto</h2>
-            <div class="info-contacto">
-                <p><strong>Teléfono:</strong> 672114170</p>
-                <p><strong>Email:</strong> Sebas517@hotmail.com</p>
-                <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/andres-sebasti%C3%A1n-rodr%C3%ADguez/" target="_blank">andres-sebastián-rodríguez</a></p>
-                <p><strong>GitHub:</strong> <a href="https://github.com/SebasRodMag" target="_blank">SebasRodMag</a></p>
+        <!-- CONTACTO -->
+        <section id="contacto" aria-labelledby="h2-contacto">
+            <h2 id="h2-contacto">Contacto</h2>
+            <div class="hero-cta contact" data-anim="fade">
+                <p>
+                    <span class="contact-icon" style="--icon: url('./assets/mail_correo.png')"
+                        aria-hidden="true"></span>
+                    <a href="mailto:sebastian@asrm.dev">sebastian@asrm.dev</a>
+                </p>
+                <p>
+                    <span class="contact-icon" style="--icon: url('./assets/github_icono.png')"
+                        aria-hidden="true"></span>
+                    <a href="https://github.com/SebasRodMag">SebasRodMag</a>
+                </p>
+                <p>
+                    <span class="contact-icon" style="--icon: url('./assets/linkedin_icono.png')"
+                        aria-hidden="true"></span>
+                    <a href="https://www.linkedin.com/in/andres-sebastian-rodriguez/">Sebastián Rodríguez</a>
+                </p>
             </div>
-        </section>
-    </main>
+            <div class="hero-cta" data-anim="fade">
+                <button class="btn ghost" id="copyEmail" type="button" data-i18n="hero.cta.copy">Copiar email</button>
+            </div>
 
-    <script src="script.js"></script>
+        </section>
+
+
+        <footer class="footer">© <span id="yr"></span> Sebastián Rodríguez</footer>
+    </div>
+
+    <!-- modal reutilizable (para Markdown) -->
+    <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+        <div class="modal-box" role="document">
+            <button class="modal-x" type="button" title="Cerrar" aria-label="Cerrar" data-close-modal>×</button>
+            <h3 id="modalTitle" class="muted" style="margin-top:0">Vista rápida</h3>
+            <div id="modalContent"></div>
+        </div>
+    </div>
 </body>
+
 </html>

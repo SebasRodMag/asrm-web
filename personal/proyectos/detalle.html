@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="es" data-theme="dark">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Detalle del proyecto</title>
+    <meta name="description" content="Detalle del proyecto.">
+    <link rel="stylesheet" href="../style.css" />
+
+    <script defer src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
+</head>
+
+<body>
+    <div class="wrap">
+        <header class="topbar">
+            <a href="../">Inicio</a>
+            <div style="flex:1"></div>
+            <div class="lang-wrap">
+                <label class="visually-hidden" for="langSelect">Idioma</label>
+                <select id="langSelect" class="select-lang" aria-label="Idioma" >
+                    <option value="es">ES</option>
+                    <option value="en">EN</option>
+                </select>
+            </div>
+
+            <button class="btn" id="themeToggle" type="button">Tema</button>
+        </header>
+
+        <main class="layout">
+            <aside>
+                <div class="toc">
+                    <h3>Contenido</h3>
+                    <nav id="tocNav" aria-label="Tabla de contenidos"></nav>
+                </div>
+            </aside>
+
+            <article id="content" class="card" aria-live="polite">
+                <p class="muted">Cargando…</p>
+            </article>
+        </main>
+
+        <footer class="footer">© <span id="yr"></span> Sebastián Rodríguez</footer>
+    </div>
+
+    <button id="backTop" class="back-top" type="button" aria-label="Volver arriba">↑ Arriba</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // ===== Config básica =====
+            const DEFAULT_LANG = 'es';
+            const qs = new URLSearchParams(location.search);
+            const base = (qs.get('src') || '').replace(/^\/+/, ''); // p.ej. "content/proyectos/clinica-mv"
+            if (!base) {
+                document.getElementById('content').innerHTML = '<p class="muted">Falta el parámetro <code>src</code>.</p>';
+                return;
+            }
+
+            // ===== Idioma (query > localStorage > navegador) =====
+            let lang = (qs.get('lang') || '').toLowerCase();
+            if (!lang) lang = localStorage.getItem('lang') || ((navigator.language || 'es').toLowerCase().startsWith('es') ? 'es' : 'en');
+            document.documentElement.lang = lang;
+
+            const langSelect = document.getElementById('langSelect');
+            if (langSelect) {
+                langSelect.value = lang;
+                langSelect.addEventListener('change', () => {
+                    const newLang = langSelect.value;
+                    localStorage.setItem('lang', newLang);
+                    // Recargamos manteniendo src y title, pero con ?lang=
+                    const u = new URL(location.href);
+                    u.searchParams.set('lang', newLang);
+                    history.replaceState(null, '', u);
+                    location.reload();
+                });
+            }
+
+            // ===== Tema =====
+            const root = document.documentElement;
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) root.setAttribute('data-theme', savedTheme);
+            document.getElementById('themeToggle')?.addEventListener('click', () => {
+                const now = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+                root.setAttribute('data-theme', now); localStorage.setItem('theme', now);
+            });
+            const yr = document.getElementById('yr'); if (yr) yr.textContent = new Date().getFullYear();
+
+            // ===== Utilidades =====
+            const parseMd = (md) =>
+                (typeof marked.parse === 'function')
+                    ? marked.parse(md, { breaks: true, mangle: false, headerIds: true })
+                    : marked(md);
+            const purify = (html) => DOMPurify.sanitize(html, { USE_PROFILES: { html: true } });
+
+            async function fetchMdWithFallback(base, lang) {
+                async function tryUrl(path) {
+                    const res = await fetch(path, { cache: 'no-store' });
+                    if (!res.ok) throw new Error(`HTTP ${res.status} (${path})`);
+                    return res.text();
+                }
+                const rel = (suffix) => `../${base}.${suffix}.md`;
+                try { return await tryUrl(rel(lang)); }
+                catch { return await tryUrl(rel(DEFAULT_LANG)); }
+            }
+
+            // ===== Carga y render =====
+            const container = document.getElementById('content');
+            try {
+                const md = await fetchMdWithFallback(base, lang);
+                const html = purify(parseMd(md));
+                container.innerHTML = html;
+
+                // Título/meta
+                const explicitTitle = qs.get('title');
+                const h1 = container.querySelector('h1');
+                document.title = `${explicitTitle || (h1?.textContent?.trim()) || 'Detalle del proyecto'} — Detalle`;
+                const metaDesc = document.querySelector('meta[name="description"]');
+                const firstP = Array.from(container.querySelectorAll('p')).find(p => p.textContent.trim());
+                if (metaDesc && firstP) metaDesc.setAttribute('content', firstP.textContent.trim().replace(/\s+/g, ' ').slice(0, 155));
+
+                // Lazy en imágenes
+                container.querySelectorAll('img:not([loading])').forEach(img => img.setAttribute('loading', 'lazy'));
+
+                // ===== TOC (H2/H3) =====
+                const tocNav = document.getElementById('tocNav');
+                if (tocNav) {
+                    tocNav.innerHTML = '';
+                    const headings = container.querySelectorAll('h2, h3');
+                    // Generar IDs limpios
+                    headings.forEach(h => {
+                        if (!h.id) {
+                            h.id = h.textContent.trim()
+                                .toLowerCase()
+                                .replace(/[^\p{L}\p{N}]+/gu, '-')
+                                .replace(/(^-|-$)/g, '');
+                        }
+                        const a = document.createElement('a');
+                        a.href = `#${h.id}`;
+                        a.textContent = h.textContent;
+                        if (h.tagName === 'H3') a.classList.add('lvl-3');
+                        tocNav.appendChild(a);
+                    });
+
+                    // Scroll suave
+                    tocNav.addEventListener('click', (e) => {
+                        const a = e.target.closest('a'); if (!a) return;
+                        e.preventDefault();
+                        const target = document.querySelector(a.getAttribute('href'));
+                        target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        history.replaceState(null, '', a.getAttribute('href'));
+                    });
+
+                    // Resaltado activo
+                    const links = Array.from(tocNav.querySelectorAll('a'));
+                    const linkMap = new Map(links.map(a => [a.getAttribute('href'), a]));
+                    const io = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            const id = '#' + entry.target.id;
+                            const link = linkMap.get(id);
+                            if (!link) return;
+                            if (entry.isIntersecting) {
+                                links.forEach(l => l.classList.remove('active'));
+                                link.classList.add('active');
+                            }
+                        });
+                    }, { rootMargin: '-30% 0px -60% 0px', threshold: [0, 1] });
+                    headings.forEach(h => io.observe(h));
+                }
+
+                // Botón “volver arriba” (opcional si existe en el DOM)
+                const backTop = document.getElementById('backTop');
+                if (backTop) {
+                    const toggle = () => backTop.classList.toggle('show', window.scrollY > 400);
+                    window.addEventListener('scroll', toggle); toggle();
+                    backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+                }
+
+            } catch (err) {
+                console.error(err);
+                container.innerHTML = `<p class="muted">No se pudo cargar el contenido: ${String(err.message || err)}</p>`;
+            }
+        });
+    </script>
+
+</body>
+
+</html>
