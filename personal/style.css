@@ -499,13 +499,16 @@ article.card img {
 }
 
 @media (max-width:720px) {
+    /*Quito el "Disponible" para dejar espacio*/
+    header .muted{ display: none; }
+
     .timeline::before {
         left: 22px;
         transform: none
     }
 
     .tl-item {
-        grid-template-columns: 44px 1fr;
+        grid-template-columns: 44px minmax(0, 1fr);
         gap: 0 12px
     }
 
@@ -515,7 +518,13 @@ article.card img {
     }
 
     .tl-item .tl-card {
-        grid-column: 2
+        grid-column: 2 !important;
+    }
+
+    /*Obligo a quitar la alternancia de tarjetas en la vista móvil*/
+    .tl-item:nth-child(odd) .tl-card,
+    .tl-item:nth-child(even) .tl-card {
+        grid-column: 2 !important;
     }
 }
 
