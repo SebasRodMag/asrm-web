@@ -1,6 +1,7 @@
 # Calendario Interactivo
 
 **Componente de calendario mensual desarrollado en Angular con FullCalendar**, diseñado para ofrecer una **experiencia fluida**, accesible y adaptable a distintos tipos de usuario dentro de la aplicación de gestión de citas médicas.
+
 ---
 
 ## Contexto y objetivos
