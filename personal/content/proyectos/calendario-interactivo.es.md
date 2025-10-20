@@ -1,49 +1,80 @@
 # Calendario Interactivo
 
-**Componente de calendario mensual en Angular con FullCalendar**, modales accesibles, filtros por estado y acciones rápidas. Enfocado en **UX fluida** y **reutilización** entre vistas.
+**Componente de calendario mensual desarrollado en Angular con FullCalendar**, diseñado para ofrecer una **experiencia fluida**, accesible y adaptable a distintos tipos de usuario dentro de la aplicación de gestión de citas médicas.
+---
 
 ## Contexto y objetivos
-Las vistas de citas necesitaban un calendario único, reutilizable y accesible.  
-**Objetivos**:
-- Crear/editar eventos desde modal con teclado y lector de pantalla.
-- Filtrar por estado (pendiente/realizada/cancelada).
-- Reutilizar el componente en pacientes y especialistas.
+En la aplicación, tanto los pacientes como los especialistas necesitaban visualizar y gestionar sus citas de forma clara y rápida.
+Para ello, se creó un **calendario interactivo único**, reutilizable en ambas vistas.
+#### Objetivos principales:
+
+- Permitir crear o editar citas desde un modal accesible con teclado y lector de pantalla.
+
+- Mostrar el estado de cada cita (pendiente, realizada o cancelada) mediante colores y filtros.
+
+- Reutilizar el mismo componente en distintas secciones sin duplicar código.
+
+El objetivo final fue mejorar la **usabilidad** (UX) y reducir la carga cognitiva del usuario.
+---
 
 ## Mi rol y alcance
-- **Frontend (Angular)**: arquitectura standalone, servicios, inputs/outputs tipados.
-- **Accesibilidad (A11y)**: foco, `aria-*`, navegación con teclado.
-- **Diseño**: estilos con variables CSS y tema claro/oscuro.
 
-## Stack y arquitectura
-- **Angular** (standalone) + **FullCalendar**.
-- **Estado**: servicio de eventos con filtros reactivos.
-- **UI**: modal accesible (focus trap, `Esc`, retorno de foco).
+**Rol**: desarrollo frontend y experiencia de usuario (UX).
 
-[ Angular App ] → [ Componente Calendario ]
-├─ Servicio de eventos (fetch/transform)
-├─ Filtros reactivos (Subject/BehaviorSubject)
-└─ Modal accesible (crear/editar)
+**Responsabilidades**:
 
-## Retos → Soluciones
-- **A11y real**: gestión de foco y teclas → *focus trap* y `aria-labelledby`.
-- **Rendimiento**: muchos eventos → lazy load y memo de transformaciones.
-- **Reutilización**: props claras (inputs) y eventos de salida (outputs) → integración en varias vistas sin duplicar código.
+- Implementación del componente con **Angular standalone** y la librería **FullCalendar**.
 
-## Resultados y métricas
-- Interacción en modal **< 200 ms**.
-- **90+** en Lighthouse (Accesibilidad/Best Practices).
-- Integrado en **3 vistas** con mínima configuración.
+- Gestión del estado y filtrado de eventos mediante **servicios reactivos**.
+
+- Diseño de la interfaz con **variables CSS**.
+
+- Aplicación de **principios de accesibilidad** (A11y): navegación con teclado, enfoque visible y atributos ``aria-*`` descriptivos.
+
+---
+
+## Arquitectura y funcionamiento
+El componente se integra en la aplicación Angular como una pieza independiente y reutilizable.
+```yaml
+[ Aplicación Angular ] → [ Componente Calendario ]
+├─ Servicio de eventos (carga y filtrado)
+├─ Filtros dinámicos (estado de la cita)
+└─ Modal accesible (crear, ver o editar cita)
+```
+- **FullCalendar** se utiliza para representar el calendario mensual.
+
+- Un **servicio centralizado** gestiona la lista de citas y los filtros por estado.
+
+- Los **modales accesibles** permiten interactuar con cada cita sin salir de la vista principal.
+
+- El sistema de **inputs y outputs tipados** facilita la comunicación con otros componentes sin acoplamiento.
+
+## Principales retos y soluciones
+|Reto|Solución aplicada|
+|----|-----------------|
+|Accesibilidad real (A11y)|Implementación de focus trap, soporte de teclas (``Esc``, ``Tab``, ``Enter``) y uso de ``aria-labelledby``.|
+|Rendimiento con muchos eventos|Carga diferida (*lazy loading*) y transformación de datos con memorias intermedias (*memoization*).|
+|Reutilización entre vistas|Parámetros configurables (inputs) y eventos personalizados (outputs) para usar el mismo calendario con distintos roles.|
+
+## Resultados
+
+- Interacciones en el modal con respuesta **inferior a 200 ms**.
+
+- **Puntuaciones de accesibilidad superiores a 90** % en Lighthouse.
+
+- Integración completa en **tres vistas diferentes** sin duplicar lógica.
+
+- Interfaz coherente con el tema visual general de la aplicación.
 
 ## Galería
 
-![Vista mensual](/assets/proyectos/calendario/mes.webp)
-![Modal de detalle](/assets/proyectos/calendario/modal.webp)
-![Barra de filtros](/assets/proyectos/calendario/filtros.webp)
+![Vista mensual](/assets/proyectos/clinica-mv/calendario.png)
 
 ## Enlaces
-- **Demo**: https://asrm.dev/calendario *(ajusta si procede)*  
-- **Repositorio**: https://github.com/SebasRodMag/... *(pon el repo real)*  
-- **Detalle**: [/proyectos/calendario-interactivo.html](/proyectos/calendario-interactivo.html)
+
+- Demo: https://www.clinicamv.lol
+
+- Repositorio: https://github.com/SebasRodMag/ClinicaDieteticaMV
 
 <!--Coloca las imágenes en:
 /assets/proyectos/calendario/{mes.webp, modal.webp, filtros.webp}-->

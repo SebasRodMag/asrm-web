@@ -1,49 +1,77 @@
 # Interactive Calendar
 
-**Angular monthly calendar component with FullCalendar**, accessible modals, status filters, and quick actions. Focused on **fluid UX** and **reusability** across views.
+**Monthly calendar component developed in Angular with FullCalendar**, designed to offer a **fluid**, accessible, and adaptable experience for different types of users within the medical appointment management application.
+---
 
-## Context and Objectives
-The appointment views needed a single, reusable, and accessible calendar.
-**Objectives**:
-- Create/edit events from the modal with a keyboard and screen reader.
-- Filter by status (pending/done/cancelled).
-- Reuse the component across patients and specialists.
+## Context and objectives
+In the application, both patients and specialists needed to view and manage their appointments clearly and quickly.
+To achieve this, a **single interactive calendar** was created, reusable in both views.
+#### Main objectives:
 
-## My Role and Scope
-- **Frontend (Angular)**: standalone architecture, services, typed inputs/outputs.
-- **Accessibility (A11y)**: focus, `aria-*`, keyboard navigation.
-- **Design**: styles with CSS variables and light/dark theme.
+- Allow appointments to be created or edited from a modal accessible with a keyboard and screen reader.
 
-## Stack and Architecture
-- **Angular** (standalone) + **FullCalendar**.
-- **State**: Event service with reactive filters.
-- **UI**: Accessible modal (focus trap, `Esc`, return focus).
+- Display the status of each appointment (pending, made, or canceled) using colors and filters.
 
-[ Angular App ] → [ Calendar Component ]
-├─ Event service (fetch/transform)
-├─ Reactive filters (Subject/BehaviorSubject)
-└─ Accessible modal (create/edit)
+- Reuse the same component in different sections without duplicating code.
 
-## Challenges → Solutions
-- **A11y real**: Focus and key management → *focus trap* and `aria-labelledby`.
-- **Performance**: Many events → lazy loading and transformation memo.
-- **Reusability**: clear props (inputs) and outputs → integration into multiple views without duplicating code.
+The ultimate goal was to improve **usability** (UX) and reduce the user's cognitive load.
+---
 
-## Results and metrics
-- Modal interaction **< 200 ms**.
-- **90+** in Lighthouse (Accessibility/Best Practices).
-- Integrated into **3 views** with minimal configuration.
+## My role and scope
+
+**Role**: Front-end development and user experience (UX).
+
+**Responsibilities**:
+
+- Implementation of the component using **Angular standalone** and the **FullCalendar** library.
+
+- State management and event filtering using **reactive services**.
+
+- Interface design using **CSS variables**.
+
+- Application of **accessibility principles** (A11y): keyboard navigation, visible focus, and descriptive ``aria-*`` attributes.
+
+---
+
+## Architecture and Functionality
+The component is integrated into the Angular application as an independent and reusable component.
+```yaml
+[ Angular Application ] → [ Calendar Component ]
+├─ Event service (loading and filtering)
+├─ Dynamic filters (appointment status)
+└─ Accessible modal (create, view, or edit appointment)
+```
+- **FullCalendar** is used to render the monthly calendar.
+
+- A **centralized service** manages the appointment list and filters by status.
+
+- **Accessible modals** allow interaction with each appointment without leaving the main view.
+
+- The system of **typed inputs and outputs** facilitates communication with other components without coupling.
+
+## Main challenges and solutions
+|Challenge|Applied solution|
+|----|-----------------|
+|Real accessibility (A11y)|Implementation of focus trap, key support (``Esc``, ``Tab``, ``Enter``), and use of ``aria-labelledby``.|
+|Performance with many events|Lazy loading and data transformation with buffers (*memoization*).|
+|Reuse between views|Configurable parameters (inputs) and custom events (outputs) to use the same calendar with different roles.|
+
+## Results
+
+- Interactions in the modal with a response time of **less than 200 ms**.
+
+- **Accessibility scores above 90%** in Lighthouse.
+
+- Full integration in **three different views** without duplicating logic.
+
+- Interface consistent with the app's overall visual theme.
 
 ## Gallery
 
-![Monthly View](/assets/projects/calendar/month.webp)
-![Detail Modal](/assets/projects/calendar/modal.webp)
-![Filter Bar](/assets/projects/calendar/filters.webp)
+[Monthly View](/assets/projects/clinica-mv/calendar.png)
 
 ## Links
-- **Demo**: https://asrm.dev/calendar *(adjust if necessary)*
-- **Repository**: https://github.com/SebasRodMag/... *(add the real repo)*
-- **Detail**: [/projects/interactive-calendar.html](/projects/interactive-calendar.html)
 
-<!--Place images in:
-/assets/projects/calendar/{month.webp, modal.webp, filters.webp}-->
+- Demo: https://www.clinicamv.lol
+
+- Repository: https://github.com/SebasRodMag/ClinicaDieteticaMV
