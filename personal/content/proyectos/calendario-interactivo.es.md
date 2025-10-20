@@ -16,6 +16,7 @@ Para ello, se creó un **calendario interactivo único**, reutilizable en ambas 
 - Reutilizar el mismo componente en distintas secciones sin duplicar código.
 
 El objetivo final fue mejorar la **usabilidad** (UX) y reducir la carga cognitiva del usuario.
+
 ---
 
 ## Mi rol y alcance
@@ -50,12 +51,16 @@ El componente se integra en la aplicación Angular como una pieza independiente 
 
 - El sistema de **inputs y outputs tipados** facilita la comunicación con otros componentes sin acoplamiento.
 
+---
+
 ## Principales retos y soluciones
 |Reto|Solución aplicada|
 |----|-----------------|
-|Accesibilidad real (A11y)|Implementación de focus trap, soporte de teclas (``Esc``, ``Tab``, ``Enter``) y uso de ``aria-labelledby``.|
-|Rendimiento con muchos eventos|Carga diferida (*lazy loading*) y transformación de datos con memorias intermedias (*memoization*).|
-|Reutilización entre vistas|Parámetros configurables (inputs) y eventos personalizados (outputs) para usar el mismo calendario con distintos roles.|
+|**Accesibilidad real (A11y)**|Implementación de focus trap, soporte de teclas (``Esc``, ``Tab``, ``Enter``) y uso de ``aria-labelledby``.|
+|**Rendimiento con muchos eventos**|Carga diferida (*lazy loading*) y transformación de datos con memorias intermedias (*memoization*).|
+|**Reutilización entre vistas**|Parámetros configurables (inputs) y eventos personalizados (outputs) para usar el mismo calendario con distintos roles.|
+
+---
 
 ## Resultados
 
@@ -67,15 +72,16 @@ El componente se integra en la aplicación Angular como una pieza independiente 
 
 - Interfaz coherente con el tema visual general de la aplicación.
 
+---
+
 ## Galería
 
 ![Vista mensual](/assets/proyectos/clinica-mv/calendario.png)
+
+---
 
 ## Enlaces
 
 - Demo: https://www.clinicamv.lol
 
 - Repositorio: https://github.com/SebasRodMag/ClinicaDieteticaMV
-
-<!--Coloca las imágenes en:
-/assets/proyectos/calendario/{mes.webp, modal.webp, filtros.webp}-->
