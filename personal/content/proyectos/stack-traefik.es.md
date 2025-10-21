@@ -1,6 +1,7 @@
 # Stack Traefik
 
 **Infraestructura con Docker y Traefik como proxy inverso** para alojar y proteger varios servicios web en el mismo servidor, con certificados HTTPS automáticos y reglas de enrutamiento por dominio.
+
 ---
 ## Contexto y objetivos
 Se necesitaba una forma de **gestionar varios sitios web en un único servidor**, cada uno con su propio dominio y certificado HTTPS, sin tener que configurar manualmente un servidor Nginx o Apache por cada uno.
@@ -29,6 +30,7 @@ Puede verse como un **“encargado del tráfico”**, que:
 3. Gestiona los certificados HTTPS de forma automática.
 
 En otras palabras, Traefik se coloca delante de tus aplicaciones web y se encarga de la seguridad y el acceso de los usuarios.
+
 ---
 ## Mi rol y alcance
 
@@ -62,6 +64,7 @@ En otras palabras, Traefik se coloca delante de tus aplicaciones web y se encarg
 **Certificados TLS**: gestionados automáticamente mediante Let’s Encrypt y almacenados de forma persistente.
 
 **Middlewares**: pequeñas configuraciones adicionales aplicadas a cada sitio (por ejemplo, redirección HTTP→HTTPS o cabeceras de seguridad).
+
 ---
 ## Ejemplo representativo (Docker Compose)
 ```yaml

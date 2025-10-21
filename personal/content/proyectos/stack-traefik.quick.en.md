@@ -1,6 +1,7 @@
 # Stack Stack Traefik (Docker Infrastructure)
 
 Centralized web traffic management with Traefik and Docker, allowing multiple projects to be hosted with automatic HTTPS and per-domain rules, all on a single server.
+
 ---
 ## Objective
 
@@ -26,6 +27,7 @@ it receives internet requests and sends them to the corresponding container base
 └─ Laravel API (api.clinicamv.lol)
 ```
 Each project is defined in Docker Compose, connected to a common network (``traefik-proxy``) and with rules (``labels``) that tell Traefik how to direct traffic.
+
 ---
 ## Results
 

@@ -9,9 +9,11 @@
     --card: #12161a;
     --line: #1d2329;
     --maxw: 1000px;
+
     --icon-size: clamp(18px, 1.6vw, 24px);
     --icon-shadow: drop-shadow(0 0 0 rgba(0, 0, 0, 0));
     --icon-shadow-hover: drop-shadow(0 1px 3px rgba(0, 0, 0, .25));
+
     --bg-ghost-blur: 10px;
     --bg-ghost-scale: 1.03;
     --bg-ghost-bright: .95;
@@ -31,22 +33,21 @@
         drop-shadow(0 0 1px rgba(0, 0, 0, .20)) drop-shadow(0 2px 6px rgba(0, 0, 0, .14));
     --icon-shadow-hover:
         drop-shadow(0 0 1px rgba(0, 0, 0, .22)) drop-shadow(0 3px 10px rgba(0, 0, 0, .20));
+
     --bg-ghost-blur: 10px;
-    /*Estaba a 9px*/
     --bg-ghost-bright: 1.02;
     --bg-ghost-contrast: 1.18;
-    /*Estaba a 1.08*/
     --bg-ghost-sat: 1.05;
     --bg-ghost-opacity: .40;
-    /*Estaba a .28*/
 }
 
 [data-bgghost="off"] #bg-ghost {
     display: none;
 }
 
+/* ===== Reset base ===== */
 * {
-    box-sizing: border-box
+    box-sizing: border-box;
 }
 
 html,
@@ -55,20 +56,16 @@ body {
     padding: 0;
     background: var(--bg);
     color: var(--fg);
-    font-family: Inter, system-ui, Segoe UI, Roboto, Arial, sans-serif
-}
-
-#themeToggle {
-    margin-left: 1rem;
+    font-family: Inter, system-ui, Segoe UI, Roboto, Arial, sans-serif;
 }
 
 a {
     color: var(--accent);
-    text-decoration: none
+    text-decoration: none;
 }
 
 a:hover {
-    text-decoration: underline
+    text-decoration: underline;
 }
 
 .wrap {
@@ -76,22 +73,41 @@ a:hover {
     z-index: 1;
     max-width: var(--maxw);
     margin: 0 auto;
-    padding: 24px
+    padding: 24px;
 }
 
-/* Header */
+/* ===== Utilidades y helpers ===== */
+.muted {
+    color: var(--muted);
+}
+
+.center {
+    text-align: center;
+}
+
+.spacer {
+    flex: 1;
+}
+
+/* ===== Header ===== */
 header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px
+    gap: 12px;
+}
+
+.site-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 nav a {
-    margin-right: 12px
+    margin-right: 12px;
 }
 
-/* Botones y chips */
+/* ===== Botones / Chips ===== */
 .btn {
     border: 1px solid var(--accent);
     color: var(--accent);
@@ -102,12 +118,16 @@ nav a {
 }
 
 .btn:hover {
-    background: color-mix(in srgb, var(--accent) 12%, transparent)
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
 }
 
 .btn.ghost {
     border: 1px solid var(--line);
-    color: var(--fg)
+    color: var(--fg);
+}
+
+.btn.active {
+    background: color-mix(in srgb, var(--accent) 14%, transparent);
 }
 
 .chip {
@@ -121,23 +141,42 @@ nav a {
     font-size: .85rem;
 }
 
-/* Hero */
+/* Badge “Disponible” */
+.badge {
+    display: inline-block;
+    padding: .2rem .5rem;
+    border-radius: .5rem;
+    background: color-mix(in srgb, var(--accent) 18%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+    color: var(--accent);
+    font-size: .8rem;
+    line-height: 1;
+}
+
+/* ===== Hero ===== */
 .hero {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    margin: 40px 0 24px
+    margin: 40px 0 24px;
 }
 
 .hero h1 {
     font-size: clamp(1.8rem, 4vw, 2.4rem);
-    margin: .3rem 0
+    margin: .3rem 0;
 }
 
 .hero .sub {
     color: var(--muted);
-    margin: 0
+    margin: 0;
+}
+
+.filterbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem .5rem;
+    justify-content: center;
 }
 
 .hero-cta {
@@ -145,41 +184,41 @@ nav a {
     gap: 10px;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 12px
+    margin-top: 12px;
 }
 
-/* Secciones */
+/* ===== Secciones ===== */
 section {
-    margin: 48px 0 0
+    margin: 48px 0 0;
 }
 
 h2 {
     text-align: center;
-    margin: 0 0 12px
+    margin: 0 0 12px;
 }
 
 .lead {
     color: var(--muted);
     text-align: center;
-    margin: 0 0 18px
+    margin: 0 0 18px;
 }
 
-/* Grid de tarjetas */
+/* ===== Grid tarjetas ===== */
 .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 16px
+    gap: 16px;
 }
 
 @media (max-width:900px) {
     .grid {
-        grid-template-columns: 1fr 1fr
+        grid-template-columns: 1fr 1fr;
     }
 }
 
 @media (max-width:600px) {
     .grid {
-        grid-template-columns: 1fr
+        grid-template-columns: 1fr;
     }
 }
 
@@ -187,30 +226,29 @@ h2 {
     background: var(--card);
     border: 1px solid var(--line);
     border-radius: 16px;
-    padding: 18px
+    padding: 18px;
 }
 
 .card h3 {
-    margin: 6px 0 8px
+    margin: 6px 0 8px;
 }
 
-/* Acciones dentro de card */
 .actions {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
     margin-top: 10px;
-    justify-content: space-around
+    justify-content: space-around;
 }
 
-/* Footer */
+/* ===== Footer ===== */
 .footer {
     margin: 56px 0 12px;
     opacity: .75;
-    text-align: center
+    text-align: center;
 }
 
-/* Modal */
+/* ===== Modal ===== */
 .modal {
     position: fixed;
     inset: 0;
@@ -225,7 +263,7 @@ h2 {
 
 .modal:not([hidden]) {
     opacity: 1;
-    visibility: visible
+    visibility: visible;
 }
 
 .modal-box {
@@ -242,14 +280,14 @@ h2 {
 }
 
 .modal:not([hidden]) .modal-box {
-    transform: translateY(0)
+    transform: translateY(0);
 }
 
 .modal-actions {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
-    margin-top: 12px
+    margin-top: 12px;
 }
 
 .modal-x {
@@ -265,14 +303,14 @@ h2 {
 }
 
 .modal-x:hover {
-    background: color-mix(in srgb, var(--fg) 6%, transparent)
+    background: color-mix(in srgb, var(--fg) 6%, transparent);
 }
 
 body.lock-scroll {
-    overflow: hidden
+    overflow: hidden;
 }
 
-/* Select de idioma */
+/* ===== Select idioma ===== */
 .visually-hidden {
     position: absolute !important;
     width: 1px;
@@ -287,7 +325,7 @@ body.lock-scroll {
 
 .lang-wrap {
     display: flex;
-    align-items: center
+    align-items: center;
 }
 
 .select-lang {
@@ -308,35 +346,35 @@ body.lock-scroll {
 }
 
 .select-lang:hover {
-    border-color: color-mix(in srgb, var(--accent) 50%, var(--line))
+    border-color: color-mix(in srgb, var(--accent) 50%, var(--line));
 }
 
 .select-lang:focus-visible {
     outline: none;
     border-color: var(--accent);
-    box-shadow: 0 0 0 .2rem color-mix(in srgb, var(--accent) 25%, transparent)
+    box-shadow: 0 0 0 .2rem color-mix(in srgb, var(--accent) 25%, transparent);
 }
 
 .select-lang.select-sm {
     padding: .35rem 1.8rem .35rem .6rem;
-    font-size: .95rem
+    font-size: .95rem;
 }
 
-/* -------- Página de detalle -------- */
+/* ===== Página de detalle (layout + TOC) ===== */
 .layout {
     display: grid;
     grid-template-columns: 260px 1fr;
     gap: 18px;
-    margin-top: 18px
+    margin-top: 18px;
 }
 
 @media (max-width:980px) {
     .layout {
-        grid-template-columns: 1fr
+        grid-template-columns: 1fr;
     }
 
     aside {
-        order: 2
+        order: 2;
     }
 }
 
@@ -344,19 +382,19 @@ aside {
     position: sticky;
     top: 16px;
     align-self: start;
-    height: max-content
+    height: max-content;
 }
 
 .toc {
     background: var(--card);
     border: 1px solid var(--line);
     border-radius: 12px;
-    padding: 12px
+    padding: 12px;
 }
 
 .toc h3 {
     margin: 6px 0 8px;
-    font-size: 1rem
+    font-size: 1rem;
 }
 
 .toc a {
@@ -365,49 +403,21 @@ aside {
     color: var(--muted);
     text-decoration: none;
     border-left: 2px solid transparent;
-    padding-left: .5rem
+    padding-left: .5rem;
 }
 
 .toc a:hover {
-    text-decoration: underline
+    text-decoration: underline;
 }
 
 .toc a.active {
     color: var(--fg);
-    border-left-color: var(--accent)
+    border-left-color: var(--accent);
 }
 
 .toc .lvl-3 {
     padding-left: 1rem;
-    font-size: .95em
-}
-
-article.card h1:first-child {
-    margin-top: 0
-}
-
-article.card img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 12px;
-    border: 1px solid var(--line)
-}
-
-.back-top {
-    position: fixed;
-    right: 16px;
-    bottom: 16px;
-    z-index: 999;
-    border: 1px solid var(--line);
-    background: var(--card);
-    color: var(--fg);
-    border-radius: .7rem;
-    padding: .55rem .8rem;
-    display: none
-}
-
-.back-top.show {
-    display: block
+    font-size: .95em;
 }
 
 .topbar {
@@ -420,7 +430,7 @@ article.card img {
     flex: 1;
 }
 
-/* En móviles, reduce márgenes y aprieta un poco el header */
+/* Mobile header/toc tweaks */
 @media (max-width: 720px) {
     .wrap {
         padding: 18px;
@@ -435,141 +445,28 @@ article.card img {
     }
 }
 
-/* ===== Detalle: mejorar legibilidad de artículo ===== */
-article.card h1,
-article.card h2,
-article.card h3 {
-    scroll-margin-top: 84px;
-    /* para que al saltar a ancla no quede pegado al borde */
-}
-
-article.card pre,
-article.card code {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
-}
-
-article.card pre {
-    background: color-mix(in srgb, var(--card) 85%, black);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 12px;
-    overflow-x: auto;
-}
-
-/* Tablas anchas: scroll horizontal solo en móvil */
-@media (max-width: 720px) {
-    article.card table {
-        display: block;
-        width: 100%;
-        overflow-x: auto;
-        border-collapse: collapse;
-    }
-}
-
-/* Imágenes formateadas */
-article.card img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 12px;
-    border: 1px solid var(--line);
-}
-
-/* ===== Detalle: TOC plegable en móvil ===== */
-@media (max-width: 980px) {
-    aside {
-        position: static;
-        top: auto;
-    }
-
-    /* quitar sticky en 1 columna */
-}
-
-@media (max-width: 720px) {
-
-    /* Simil “details” visual para el toc */
-    .toc {
-        padding: 0;
-        overflow: hidden;
-    }
-
-    .toc h3 {
-        margin: 0;
-        padding: 12px;
-        cursor: pointer;
-        user-select: none;
-        border-bottom: 1px solid var(--line);
-    }
-
-    .toc nav {
-        padding: 10px 12px;
-        display: none;
-        /* cerrado por defecto en móvil */
-    }
-
-    .toc.open nav {
-        display: block;
-        /* abierto cuando añadimos .open vía JS */
-    }
-}
-
-/* Enlaces del TOC más apretados en móvil */
-@media (max-width: 720px) {
-    .toc a {
-        margin: .2rem 0;
-    }
-
-    article.card h1 {
-        font-size: 1.45rem;
-    }
-
-    article.card h2 {
-        font-size: 1.2rem;
-    }
-
-    article.card h3 {
-        font-size: 1.05rem;
-    }
-}
-
-/* Botón “volver arriba” respetando safe-area */
-.back-top {
-    bottom: calc(16px + env(safe-area-inset-bottom));
-}
-
-/* ===== Contenido responsive dentro de article.card ===== */
+/* ===== Artículo (legibilidad) ===== */
 article.card {
     --measure: 68ch;
-    /* ancho de línea ideal en desktop */
     font-size: clamp(.95rem, .9rem + .3vw, 1.05rem);
     line-height: 1.6;
 }
 
-/* Mantén el texto legible sin ocupar todo el ancho enorme en desktop */
-article.card>p,
-article.card>ul,
-article.card>ol,
-article.card>blockquote,
-article.card>pre,
-article.card>table,
-article.card>figure {
+article.card :where(p, ul, ol, blockquote, pre, table, figure) {
     max-inline-size: var(--measure);
+    /* centra el bloque largo en desktop */
+    margin-inline: auto;
 }
 
-/* En móvil, usa todo el ancho disponible */
-@media (max-width: 720px) {
-    article.card>* {
-        max-inline-size: 100%;
-    }
-}
 
-/* Párrafos y listados: buenos cortes de línea */
+
 article.card p,
 article.card li {
     overflow-wrap: anywhere;
     hyphens: auto;
 }
 
-/* Imágenes y figuras fluidas */
+/* Imágenes (consolidado) */
 article.card img {
     display: block;
     max-width: 100%;
@@ -578,6 +475,7 @@ article.card img {
     border: 1px solid var(--line);
 }
 
+/* Figuras */
 article.card figure {
     margin: 1rem 0;
 }
@@ -588,7 +486,7 @@ article.card figure>figcaption {
     margin-top: .35rem;
 }
 
-/* Código legible y scrolleable */
+/* Código (consolidado) */
 article.card pre {
     background: color-mix(in srgb, var(--card) 85%, black);
     border: 1px solid var(--line);
@@ -602,7 +500,7 @@ article.card code {
     font-size: .95em;
 }
 
-/* Tablas: scroll horizontal en pantallas estrechas */
+/* Tablas */
 article.card table {
     border-collapse: collapse;
     width: 100%;
@@ -615,19 +513,32 @@ article.card td {
     text-align: left;
 }
 
-@media (max-width: 720px) {
+@media (max-width:720px) {
     article.card table {
         display: block;
+        width: 100%;
         overflow-x: auto;
+        border-collapse: collapse;
+    }
+
+    article.card :where(p, ul, ol, blockquote, pre, table, figure) {
+        max-inline-size: 100%;
+        margin-inline: 0;
     }
 }
 
-/* Iframes (videos, demos) responsive vía aspect-ratio */
+/* Headings con offset para anchors (consolidado) */
+article.card h1,
+article.card h2,
+article.card h3 {
+    scroll-margin-top: 84px;
+}
+
+/* Iframes responsive */
 .embed {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 9;
-    /* ajusta si usas 4:3 u otro */
+    aspect-ratio: 16/9;
     border-radius: 12px;
     border: 1px solid var(--line);
     overflow: hidden;
@@ -642,15 +553,27 @@ article.card td {
     border: 0;
 }
 
-/* Titulares con espacio al hacer anchor jump (ya tienes scroll-margin, lo mantengo) */
-article.card h1,
-article.card h2,
-article.card h3 {
-    scroll-margin-top: 84px;
+/* Imágenes: que nunca desborden aunque vengan con width inline */
+article.card img {
+    display: block;
+    max-width: 100% !important;
+    height: auto !important;
 }
 
-/* Un poco de ritmo vertical en móvil */
-@media (max-width: 720px) {
+/* Tablas anchas: scroll horizontal controlado (ya lo tenías, lo refuerzo) */
+article.card table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Ritmo en móvil */
+@media (max-width:720px) {
+    article.card table {
+        display: block;
+        overflow-x: auto;
+    }
+
     article.card h1 {
         font-size: 1.45rem;
     }
@@ -670,16 +593,30 @@ article.card h3 {
     }
 }
 
-/* -------- Timeline centrado -------- */
-.center {
-    text-align: center
+/* ===== Botón volver arriba ===== */
+.back-top {
+    position: fixed;
+    right: 16px;
+    bottom: calc(16px + env(safe-area-inset-bottom));
+    z-index: 999;
+    border: 1px solid var(--line);
+    background: var(--card);
+    color: var(--fg);
+    border-radius: .7rem;
+    padding: .55rem .8rem;
+    display: none;
 }
 
+.back-top.show {
+    display: block;
+}
+
+/* ===== Timeline ===== */
 .timeline {
     position: relative;
     margin: 28px 0 0;
     padding: 0;
-    list-style: none
+    list-style: none;
 }
 
 .timeline::before {
@@ -690,7 +627,7 @@ article.card h3 {
     bottom: 0;
     width: 2px;
     transform: translateX(-50%);
-    background: var(--line)
+    background: var(--line);
 }
 
 .tl-item {
@@ -698,7 +635,7 @@ article.card h3 {
     grid-template-columns: 1fr 40px 1fr;
     align-items: start;
     gap: 0 18px;
-    margin: 18px 0
+    margin: 18px 0;
 }
 
 .tl-dot {
@@ -711,7 +648,7 @@ article.card h3 {
     background: var(--card);
     border: 2px solid var(--accent);
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent);
-    margin-top: .65rem
+    margin-top: .65rem;
 }
 
 .tl-card {
@@ -719,88 +656,83 @@ article.card h3 {
     border: 1px solid var(--line);
     border-radius: 16px;
     padding: 14px 16px;
-    box-shadow: 0 1px 0 rgba(0, 0, 0, .08)
+    box-shadow: 0 1px 0 rgba(0, 0, 0, .08);
 }
 
 .tl-card h3 {
-    margin: .2rem 0 .2rem
+    margin: .2rem 0 .2rem;
 }
 
 .tl-card .muted {
     color: var(--muted);
-    margin: 0 0 .4rem
+    margin: 0 0 .4rem;
 }
 
 .tl-card ul {
-    margin: .4rem 0 .6rem .9rem
+    margin: .4rem 0 .6rem .9rem;
 }
 
 .tl-card .actions {
     display: flex;
     gap: 8px;
-    flex-wrap: wrap
+    flex-wrap: wrap;
 }
 
 .tl-item:nth-child(odd) .tl-card {
-    grid-column: 1
+    grid-column: 1;
 }
 
 .tl-item:nth-child(even) .tl-card {
-    grid-column: 3
+    grid-column: 3;
 }
 
 .tl-item:first-child .tl-card {
-    box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent),
+    box-shadow:
+        0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent),
         0 8px 24px rgba(0, 0, 0, .20);
 }
 
 .tl-item:first-child .tl-dot {
-    background: var(--accent)
+    background: var(--accent);
 }
 
 @media (max-width:720px) {
-
-    /*Quito el "Disponible" para dejar espacio*/
     header .muted {
         display: none;
     }
 
+    /* oculta “Disponible” para más espacio */
+
     .timeline::before {
         left: 22px;
-        transform: none
+        transform: none;
     }
 
     .tl-item {
         grid-template-columns: 44px minmax(0, 1fr);
-        gap: 0 12px
+        gap: 0 12px;
     }
 
     .tl-dot {
         grid-column: 1;
-        margin-left: 8px
+        margin-left: 8px;
     }
 
-    .tl-item .tl-card {
-        grid-column: 2 !important;
-    }
-
-    /*Obligo a quitar la alternancia de tarjetas en la vista móvil*/
+    .tl-item .tl-card,
     .tl-item:nth-child(odd) .tl-card,
     .tl-item:nth-child(even) .tl-card {
         grid-column: 2 !important;
     }
 }
 
-/*Clases para la sección de contacto*/
+/* ===== Contacto ===== */
 .hero-cta.contact {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    /* icono + texto alineados a la izquierda */
     gap: .35rem;
 }
 
-/* Cada fila p icono + link */
 .hero-cta.contact p {
     display: inline-flex;
     align-items: center;
@@ -808,13 +740,11 @@ article.card h3 {
     margin: .2rem 0;
 }
 
-/* Tamaño fluido de los iconos con el cambio de tamaño según el widescreen, 1:1, no se deformen */
 .contact-icon {
     width: var(--icon-size);
     height: var(--icon-size);
     display: inline-block;
     background: var(--accent);
-    /* ¡el tinte! */
     -webkit-mask: var(--icon) center/contain no-repeat;
     mask: var(--icon) center/contain no-repeat;
     flex: 0 0 auto;
@@ -824,12 +754,10 @@ article.card h3 {
     transition: filter .15s ease, transform .15s ease;
 }
 
-/* Para mejorar el click-target de los enlaces */
 .hero-cta.contact a {
     line-height: 1.2;
 }
 
-/* Realce al pasar el ratón */
 .hero-cta.contact a:hover .contact-icon,
 .hero-cta.contact a:focus-visible .contact-icon {
     filter: var(--icon-shadow-hover);
@@ -842,35 +770,26 @@ article.card h3 {
     }
 }
 
-/* ---- Background ---- */
-/* Fondo “reflejo” desenfocado con parallax */
+/* ===== Background “ghost” ===== */
 #bg-ghost {
     position: fixed;
     inset: -28px;
-    /* sangría para que el blur no recorte bordes */
     z-index: 0;
     pointer-events: none;
     user-select: none;
     filter:
         blur(var(--bg-ghost-blur)) saturate(var(--bg-ghost-sat)) contrast(var(--bg-ghost-contrast)) brightness(var(--bg-ghost-bright));
     opacity: var(--bg-ghost-opacity);
-    /* intensidad del reflejo */
     transform: translateY(var(--bg-parallax, 0px)) scale(var(--bg-ghost-scale));
     will-change: transform;
-
 }
 
-/* Ajustes por tema */
 [data-theme="light"] #bg-ghost {
     mix-blend-mode: multiply;
-    /*     filter: blur(18px) saturate(.95) brightness(1.06);
-    opacity: .24; */
 }
 
 [data-theme="dark"] #bg-ghost {
     mix-blend-mode: normal;
-    /*     filter: blur(14px) saturate(.85) brightness(.92);
-    opacity: .14; */
 }
 
 #bg-ghost .wrap {
@@ -879,36 +798,40 @@ article.card h3 {
     opacity: 1;
 }
 
-/* ----Boton de toggle del fondo ---- */
-
-/* Ancho estable para ES/EN y ON/OFF */
+/* ===== Toggle fondo ===== */
 .toggle-btn {
     min-inline-size: 9rem;
-    /* cubre "Background: OFF" en inglés */
     display: inline-flex;
     justify-content: center;
     white-space: nowrap;
     margin-left: 1rem;
 }
 
-/* Un poco más compacto en móviles estrechos */
-@media (max-width: 480px) {
+@media (max-width:480px) {
     .toggle-btn {
         min-inline-size: 9.5rem;
     }
 }
 
-/* Menú visible solo en la vista móvil*/
-/* Menú móvil: por defecto oculto en desktop */
+/* ===== Header conf id (fix) ===== */
+#header-conf {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* ===== Botón tema en desktop alignment ===== */
+#themeToggle {
+    margin-left: 1rem;
+}
+
+/* ===== Menú móvil (.mnav) ===== */
 .mnav {
     display: none;
     position: relative;
 }
 
-.header-conf {
-    display: flex;
-    flex-direction: column !important;
-}
+/* único bloque consolidado */
 
 /* Botón icono */
 .icon-btn {
@@ -938,16 +861,16 @@ article.card h3 {
     border-radius: 2px;
 }
 
+.hamburger {
+    height: 2px;
+}
+
 .hamburger::before,
 .hamburger::after {
     content: "";
     position: absolute;
     left: 0;
     right: 0;
-    height: 2px;
-}
-
-.hamburger {
     height: 2px;
 }
 
@@ -960,17 +883,11 @@ article.card h3 {
 }
 
 /* Panel del menú */
-.mnav {
-    position: relative;
-}
-
 .mnav .menu {
     position: absolute;
     top: calc(100% + 8px);
     inset-inline-start: 0;
-    /* == left:0 en LTR */
     inset-inline-end: auto;
-    /* quita el right anterior */
     display: flex;
     flex-direction: column;
     gap: .5rem;
@@ -978,7 +895,6 @@ article.card h3 {
     border: 1px solid var(--line);
     border-radius: 12px;
     padding: .6rem .8rem;
-    /* límites para pantallas estrechas */
     max-inline-size: min(280px, calc(100vw - 16px));
     box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
     z-index: 1000;
@@ -993,7 +909,7 @@ article.card h3 {
     display: none;
 }
 
-/* Animar icono a “X” cuando está abierto (opcional) */
+/* Animación a “X” cuando está abierto */
 .mnav[open] .hamburger {
     background: transparent;
 }
@@ -1006,7 +922,7 @@ article.card h3 {
     transform: translateY(-5px) rotate(-45deg);
 }
 
-/* En móvil ocultamos el nav normal y mostramos el menú */
+/* En móvil, ocultar nav desktop y mostrar menú móvil */
 @media (max-width:720px) {
     header nav[aria-label="principal"] {
         display: none;
@@ -1014,10 +930,6 @@ article.card h3 {
 
     header .mnav {
         display: block;
-    }
-
-    .spacer {
-        flex: 1;
     }
 
     #bgToggle {
@@ -1031,8 +943,61 @@ article.card h3 {
     .mnav .menu .bg-toggle-item {
         display: flex;
     }
+}
 
-    .spacer {
-        flex: 1;
+/* ========== HARDENING RESPONSIVE PARA DETALLE ========== */
+
+/* 1) Todo lo que renderiza el MD dentro del artículo nunca debe desbordar */
+article.card,
+article.card * {
+    box-sizing: border-box;
+    max-width: 100%;
+}
+
+/* 2) Ancho de lectura ideal aplicado a títulos y bloques de texto, incluso con wrappers */
+article.card :where(h1, h2, h3, p, ul, ol, blockquote, pre, table, figure) {
+    max-inline-size: var(--measure);
+    margin-inline: auto;
+}
+
+/* 3) Si el MD trae estilos inline con width/height fijos, capamos el width */
+article.card :where([style*="width:"]) {
+    max-width: 100% !important;
+}
+
+/* 4) Imágenes, iframes y vídeos fluidos pase lo que pase */
+article.card :where(img, iframe, video) {
+    display: block;
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+/* 5) Código largo y URLs sin romper el layout */
+article.card :where(pre, code, kbd, samp) {
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+}
+
+/* 6) Tablas anchas: scroll horizontal controlado */
+article.card table {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: auto;
+}
+
+@media (max-width: 980px) {
+    article.card table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* 7) En móvil, usa todo el ancho (sin el margen auto del punto 2) */
+@media (max-width: 720px) {
+    article.card :where(h1, h2, h3, p, ul, ol, blockquote, pre, table, figure) {
+        max-inline-size: 100%;
+        margin-inline: 0;
     }
 }
