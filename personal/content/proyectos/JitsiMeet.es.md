@@ -88,8 +88,8 @@ La solución final combina **seguridad**, **usabilidad** y **mantenimiento** **s
 
 ## Enlaces
 
-- **Repositorio**: GitHub – Clínica Dietética MV
+- **Repositorio**: https://github.com/SebasRodMag/ClinicaDieteticaMV
 
-- **Tecnología base**: Jitsi Meet External API
+- **Tecnología base**: Jitsi Meet as a Service: https://jaas.8x8.vc/#/
 
-- **Detalle técnico**: content/jitsiMeet.md
+- **Detalle técnico**: <a href="proyectos/detalle.html?src=content/JitsiMeet&title=Jitsi%20Meet">jitsiMeet.md</a>

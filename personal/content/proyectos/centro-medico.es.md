@@ -53,4 +53,4 @@ Este fue un proyecto full-stack donde aplicamos tecnologías como:
         - El Médico solo consulta y edita las ``citas del día``.
 
 ## Enlaces
-- - **Repositorio**: https://github.com/SebasRodMag/Proyect_Centro_Medico
+- **Repositorio**: https://github.com/SebasRodMag/Proyect_Centro_Medico
