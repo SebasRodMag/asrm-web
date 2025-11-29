@@ -57,9 +57,9 @@ document.addEventListener('DOMContentLoaded', () => {
             'card.item.ci.2': 'Focus trap y accesibilidad real.',
             'card.item.vj.1': 'Salas seguras con token.',
             'card.item.vj.2': 'Join en un clic desde la cita.',
-            'card.item.op.1': 'Documentación del código.',
-            'card.item.op.2': 'Presentación de la documentación.',
-            'card.item.op.3': 'Test de end-points desde la misma presentación.',
+            'card.item.op.1': 'Documentación del código',
+            'card.item.op.2': 'Presentación de la documentación',
+            'card.item.op.3': 'Test de end-points desde la misma presentación',
         },
         en: {
             'nav.experience': 'Experience',
@@ -107,9 +107,9 @@ document.addEventListener('DOMContentLoaded', () => {
             'card.item.ci.2': 'Focus trap and real accessibility.',
             'card.item.vj.1': 'Secure rooms with token.',
             'card.item.vj.2': 'One-click join from the appointment.',
-            'card.item.op.1': 'Code documentation.',
-            'card.item.op.2': 'Documentation presentation.',
-            'card.item.op.3': 'End-point testing from the same presentation.',
+            'card.item.op.1': 'Code documentation',
+            'card.item.op.2': 'Documentation presentation',
+            'card.item.op.3': 'End-point testing from the same presentation',
         }
     };
 
