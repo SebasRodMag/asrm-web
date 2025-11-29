@@ -121,9 +121,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Aplicar textos UI
     function applyI18n(lang) {
+        console.log('Applying i18n for lang:', lang);
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
             const txt = I18N[lang]?.[key] ?? I18N[DEFAULT_LANG]?.[key];
+            console.log('Key:', key, 'Text:', txt);
             if (txt) el.textContent = txt;
         });
         document.documentElement.lang = lang;
