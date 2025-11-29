@@ -39,6 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
             'card.cal.title': 'Calendario Interactivo',
             'card.cal.desc': 'FullCalendar + Angular, modales accesibles y filtros.',
             'card.tr.title': 'Stack Traefik',
+            'card.vj.title': 'Videollamadas con Jitsi',
+            'card.op.title': 'Documentación mediante Open-API Swagger',
             'card.tr.desc': 'Reverse proxy, TLS automático y CI/CD con GitHub Actions.',
             'card.text.gc': 'Plataforma para la gestión de citas clínicas, optimizando la atención y el seguimiento entre especialistas y pacientes. La solución combina una API REST (Laravel) con una SPA (Angular) integrando Jitsi Meet para la realización de conferencias.',
             'card.text.cm': 'Es una aplicación web, que consta de un backend (API Rest) con Laravel y el front (SPA) en Angular gestionado desde contenedores Docker con base de datos en MySQL. La aplicación consiste en un sistema de gestión de citas médicas para un centro que realiza reconocimientos médicos para empresas.',
@@ -55,6 +57,9 @@ document.addEventListener('DOMContentLoaded', () => {
             'card.item.ci.2': 'Focus trap y accesibilidad real.',
             'card.item.vj.1': 'Salas seguras con token.',
             'card.item.vj.2': 'Join en un clic desde la cita.',
+            'card.item.op.1': 'Documentación del código.',
+            'card.item.op.2': 'Presentación de la documentación.',
+            'card.item.op.3': 'Test de end-points desde la misma presentación.',
         },
         en: {
             'nav.experience': 'Experience',
@@ -84,6 +89,8 @@ document.addEventListener('DOMContentLoaded', () => {
             'card.cal.title': 'Interactive Calendar',
             'card.cal.desc': 'FullCalendar + Angular, accessible modals and filters.',
             'card.tr.title': 'Traefik Stack',
+            'card.vj.title': 'Jitsi Videocalls',
+            'card.op.title': 'Open-API Swagger Documentation',
             'card.tr.desc': 'Reverse proxy, automatic TLS and CI/CD with GitHub Actions.',
             'card.text.gc': 'Platform for managing clinical appointments, optimizing care and follow-up between specialists and patients. The solution combines a REST API (Laravel) with a SPA (Angular) integrating Jitsi Meet for conferencing.',
             'card.text.cm': 'It is a web application, which consists of a backend (API Rest) with Laravel and the front (SPA) in Angular managed from Docker containers with a MySQL database. The application consists of a medical appointment management system for a center that performs medical examinations for companies.',
@@ -100,6 +107,9 @@ document.addEventListener('DOMContentLoaded', () => {
             'card.item.ci.2': 'Focus trap and real accessibility.',
             'card.item.vj.1': 'Secure rooms with token.',
             'card.item.vj.2': 'One-click join from the appointment.',
+            'card.item.op.1': 'Code documentation.',
+            'card.item.op.2': 'Documentation presentation.',
+            'card.item.op.3': 'End-point testing from the same presentation.',
         }
     };
 
