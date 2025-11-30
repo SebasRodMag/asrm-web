@@ -26,5 +26,5 @@ https://api.clinicamv.lol/api/docs/openapi.json
 - #### 4. Traefik publica todo mediante HTTPS y balancea según el dominio.
 
 Este sistema permite tener una **API totalmente documentada**, accesible, mantenible y reutilizable tanto por desarrolladores internos como externos.
-
-[Ver en detalle](proyectos/detalle.html?src=content/proyectos/documentoacion-l5-Swagger&title=l5-Swagger%20Open-API)
+---
+[Ver en detalle](proyectos/detalle.html?src=content/proyectos/documentacion-l5-Swagger&title=l5-Swagger%20Open-API)

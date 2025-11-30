@@ -38,6 +38,7 @@ Cada proyecto se define en Docker Compose, conectado a una red común (``traefik
 - **Reglas claras y reutilizables** por servicio.
 
 - **Arquitectura modular y segura**, lista para escalar nuevos proyectos.
+
 ---
 
 [Ver en detalle](proyectos/detalle.html?src=content/proyectos/stack-traefik&title=Stack%20Traefik)
