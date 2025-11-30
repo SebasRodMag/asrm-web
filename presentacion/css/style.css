@@ -45,6 +45,22 @@ body {
     background-color: #02462c;
 }
 
+#block-5 {
+    background-color: #0a2d31;
+}
+
+#block-6 {
+    background-color: #02462c;
+}
+
+#block-7 {
+    background-color: #0a2d31;
+}
+
+#block-8 {
+    background-color: #02462c;
+}
+
 /* Contenedor para el texto dentro de cada bloque */
 .full-screen-block .text-content {
     width: calc(50% - 20px);
