@@ -18,5 +18,10 @@
         "id": "block-4",
         "htmlFile": "contenido/004.html",
         "imageFile": "contenido/004.png"
+    },
+    {
+        "id": "block-5",
+        "htmlFile": "contenido/005.html",
+        "imageFile": "contenido/005.png"
     }
 ]
