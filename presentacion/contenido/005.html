@@ -1,11 +1,30 @@
 <div class="block-wrapper">
     <div class="text-content">
-        <h2>Documentación con <strong>Open API - Swagger</strong></h2>
-        <p>En <strong>Laravel</strong> se se puede utilizar un paquete como <strong>L5-Swagger</strong> para documentar el código. Se emplean anotaciones con la etiqueta "@OA"</p>
-        <p>Mediante el comando "php artisan l5-swagger:generate", se genera un archivo json que compila las anotaciones que encuentra en nuestro código con esta etiqueta y la muestra ordenadas, con la posibilidad de comprobar las rutas</p>
+        <h2>Roles del sistema</h2>
+        <p><strong>Administrador:</strong></p>
+        <ul>
+            <li>Gestión completa de usuarios</li>
+            <li>Control general del sistema</li>
+        </ul>
+        <p><strong>Especialista:</strong></p>
+        <ul>
+            <li>Gestión de citas</li>
+            <li>Acceso a historiales médicos</li>
+            <li>Subida y consulta de documentos</li>
+        </ul>
+        <p><strong>Paciente:</strong></p>
+        <ul>
+            <li>Consulta de citas</li>
+            <li>Acceso a su historial y documentos</li>
+        </ul>
+        <p><strong>Usuario:</strong></p>
+        <ul>
+            <li>Usuario sin rol clínico asignado inicialmente</li>
+        </ul>
+
     </div>
-    </div>
-    <div class="image-container">
-        <img src="contenido/005.png" alt="Imagen de Swagger.">
-    </div>
+</div>
+<div class="image-container">
+    <img src="contenido/005.png" alt="Imagen de Swagger.">
+</div>
 </div>
