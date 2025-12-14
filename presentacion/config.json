@@ -12,12 +12,12 @@
     {
         "id": "block-3",
         "htmlFile": "contenido/003.html",
-        "imageFile": "contenido/003.png"
+        "imageFile": "contenido/003_edit.png"
     },
     {
         "id": "block-4",
         "htmlFile": "contenido/004.html",
-        "imageFile": "contenido/004.png"
+        "imageFile": "contenido/004_edit.png"
     },
     {
         "id": "block-5",
