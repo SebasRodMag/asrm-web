@@ -23,5 +23,25 @@
         "id": "block-5",
         "htmlFile": "contenido/005.html",
         "imageFile": "contenido/005.png"
+    },
+    {
+        "id": "block-6",
+        "htmlFile": "contenido/006.html",
+        "imageFile": "contenido/006.png"
+    },
+    {
+        "id": "block-7",
+        "htmlFile": "contenido/007.html",
+        "imageFile": "contenido/007.png"
+    },
+    {
+        "id": "block-8",
+        "htmlFile": "contenido/008.html",
+        "imageFile": "contenido/008.png"
+    },
+    {
+        "id": "block-9",
+        "htmlFile": "contenido/009.html"
     }
+    
 ]
